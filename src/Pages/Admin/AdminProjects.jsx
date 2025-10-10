@@ -1,8 +1,31 @@
 import React from 'react'
+import {FaSearch,FaPlus,FaFilter} from 'react-icons/fa'
+import '../../SCSS/AdminStyles/AdminProjectStyles/AdminProjects.scss'
+import SearchAndButton from '../../Components/SerachAnd/SearchAndButton.jsx'
 
 const AdminProjects = () => {
   return (
     <div>
+      
+      <SearchAndButton
+
+      title1="Search Projects"
+      title2="Add New Project"
+      
+       />
+
+      <div className='search_bar'>
+        
+        <button><input type="text" placeholder='Search by Event Name'/> <FaSearch/></button> 
+      </div>
+      
+      <div className='filter_bar'>
+        <button><FaFilter></FaFilter> Filter</button>
+      </div>
+      <br />
+
+      <div className='table'>
+
       <table border="1">
         <tr>
             <th>Event Name</th>
@@ -28,9 +51,33 @@ const AdminProjects = () => {
             <td>Some notes about Event 3</td>
             <td><button>Add ChairPersons</button></td>
         </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td><button>Add ChairPersons</button></td>
+        </tr>
+
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td><button>Add ChairPersons</button></td>
+        </tr>
+
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td><button>Add ChairPersons</button></td>  
+        </tr>
 
         
-      </table>
+      </table>  
+      </div>
+
+      
+      
     </div>
   )
 }
