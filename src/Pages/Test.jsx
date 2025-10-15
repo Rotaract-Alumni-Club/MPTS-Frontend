@@ -1,8 +1,8 @@
 import React from 'react'
-import LeftNavigationBar from '../Component/LeftNavigationBar/LeftNavigationBar'
-import Header from '../Component/Header/Header'
-import AddView from '../Component/ManageAccount/AddView'
-import BasicInfo from '../Component/ManageAccount/BasicInfo'
+import LeftNavigationBar from '../Components/LeftNavigationBar/LeftNavigationBar'
+import Header from '../Components/Header/Header'
+import AddView from '../Components/ManageAccount/AddView'
+import BasicInfo from '../Components/ManageAccount/BasicInfo'
 
 function Test() {
   return (
