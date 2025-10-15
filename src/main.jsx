@@ -1,8 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Header from './Component/Header/Header'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Test from './Pages/Test'
+import Test from './Pages/Test.jsx'
 
 
 const router= createBrowserRouter([
