@@ -48,6 +48,8 @@ const router= createBrowserRouter([
   // }
 ])
 
+import AdminProjects from './Pages/Admin/AdminProjects.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -1,0 +1,16 @@
+$bgcolor: rgb(136, 0, 255);
+$textcolor: rgb(126, 26, 26);
+$fontsize: 18px;
+
+
+.search_and_button {
+  display: flex;
+  color: black;
+  font-size: $fontsize;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
