@@ -1,16 +1,21 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaCalendar, FaSignOutAlt } from 'react-icons/fa';
-import { FaMessage } from 'react-icons/fa6';
+import { FaCalendar, FaSignOutAlt, FaEnvelope } from 'react-icons/fa'
+import '../../SCSS/Header.scss'
+
 function Header() {
   return (
-    <div className="header">
-        <p>Rotaract</p>
-        <Link to="/"><FaMessage/></Link>
-        <Link to="/Profile"><FaCalendar/></Link>
-        <Link to="/My Projects"><FaSignOutAlt/></Link>
-        
-    </div>
+    <header className="app-header">
+      <div className="brand">
+        <img src="https://rcunialumni.home.blog/wp-content/uploads/2023/05/racualu-full-black-logo.png?w=1080" alt="Rotaract logo" className="logo" />
+      </div>
+
+      <div className="header-actions">
+        <Link to="/calendar" className="icon-btn" aria-label="Calendar"><FaCalendar/></Link>
+        <Link to="/signout" className="icon-btn" aria-label="Sign out"><FaSignOutAlt/></Link>
+      </div>
+    </header>
   )
 }
 
