@@ -4,7 +4,7 @@ $fontsize: 18px;
 
 
 .search_and_button {
-  display: flex;
+  
   color: black;
   font-size: $fontsize;
   padding: 10px;
@@ -12,5 +12,7 @@ $fontsize: 18px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 1px;
+  background-color: rgb(165, 127, 255);
 }
