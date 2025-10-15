@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Test from './Pages/Test.jsx'
 
 
+
 const router= createBrowserRouter([
   {
     path:"/",
@@ -45,11 +46,17 @@ const router= createBrowserRouter([
   //   element:<Settings/>,
   //   errorElement:<div>Page Not Found</div>
   // }
+  {
+    path:"/Tasks",
+    element:<ManageTask/>,
+    errorElement:<div>Page Not Found</div>
+  }
 ])
 
 import AdminProjects from './Pages/Admin/AdminProjects.jsx'
 import AdminCommittees from './Pages/Admin/AdminCommitees.jsx'
 import AdminDashboard from './Pages/Admin/AdminDashboard.jsx'
+import ManageTask from './Pages/Chair/ManageTask.jsx'
 
 
 
