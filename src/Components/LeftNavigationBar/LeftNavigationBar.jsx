@@ -1,46 +1,47 @@
+// ...existing code...
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { FaHome, FaUser, FaProjectDiagram, FaHandsHelping } from 'react-icons/fa';
 import { FaCodeCommit, FaPersonRifle } from 'react-icons/fa6';
+import '../../SCSS/ChairStyle/LeftNavChair.scss'
+
 function LeftNavigationBar() {
+  const linkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')
+
   return (
     <div>
         <div className="LeftNavigationBar">
             <div className="row">
                 <FaHome/>
-                <Link to="/">Home</Link>
+                <NavLink to="/" className={linkClass}>Home</NavLink>
             </div>
             <div className="row">
                 <FaProjectDiagram/>
-                <Link to="/My Projects">My Projects</Link>
+                <NavLink to="/my-projects" className={linkClass}>My Projects</NavLink>
             </div>
             <div className="row">
                 <FaUser/>
-                <Link to="/Profile">Profile</Link>
+                <NavLink to="/profile" className={linkClass}>Profile</NavLink>
             </div>
             <div className="row">
-                <Link to="/Rotaract">Rotaract</Link>
+                <NavLink to="/rotaract" className={linkClass}>Rotaract</NavLink>
             </div>
             <div className="row">
-                <Link to="/Manage">Manage</Link>
+                <NavLink to="/manage" className={linkClass}>Manage</NavLink>
                 <div className="row1">
-                    <Link to="/Manage/Projects">Projects</Link>
-                    <Link to="/Manage/Members">Members</Link>
+                    <NavLink to="/manageProjects" className={linkClass}>Projects</NavLink>
+                    <NavLink to="/manageCommittees" className={linkClass}>Committees</NavLink>
+                    <NavLink to="/manageTasks" className={linkClass}>Tasks</NavLink>
                 </div>
-
             </div>
-            
+
             <div className="row">
                 <FaCodeCommit/>
-                <Link to="/Committees">Committees</Link>
+                <NavLink to="/reports" className={linkClass}>Reports</NavLink>
             </div>
             <div className="row">
-                <Link to="/Reports">Reports</Link>
+                <NavLink to="/settings" className={linkClass}>Settings</NavLink>
             </div>
-            <div className="row">
-                <Link to="/Settings">Settings</Link>
-            </div>
-            
         </div>
     </div>
   )

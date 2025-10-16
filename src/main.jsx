@@ -13,7 +13,7 @@ const router= createBrowserRouter([
   },
 
   {
-    path: "/ManageCommitees",
+    path: "/ManageCommittees",
     element: <ManageCommitees/>,
     errorElement:<div>Page Not Found</div>
   }
