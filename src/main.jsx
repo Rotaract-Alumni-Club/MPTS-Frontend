@@ -17,7 +17,7 @@ const router= createBrowserRouter([
     path: "/ManageCommitees",
     element: <ManageCommitees/>,
     errorElement:<div>Page Not Found</div>
-  }
+  },
   // {
   //   path:"/Profile",
   //   element:<Profile/>,
