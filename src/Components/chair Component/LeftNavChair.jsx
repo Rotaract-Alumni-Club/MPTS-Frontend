@@ -2,10 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaHome, FaUser, FaProjectDiagram, FaHandsHelping } from 'react-icons/fa';
 import { FaCodeCommit, FaPersonRifle } from 'react-icons/fa6';
+
 function LeftNavigationBar() {
   return (
     <div>
         <div className="LeftNavigationBar">
+             <div className="brand">
+        <img src="https://rcunialumni.home.blog/wp-content/uploads/2023/05/racualu-full-black-logo.png?w=1080" alt="Rotaract logo" className="logo" />
+      </div>
             <div className="row">
                 <FaHome/>
                 <Link to="/">Home</Link>
@@ -24,17 +28,15 @@ function LeftNavigationBar() {
             <div className="row">
                 <Link to="/Manage">Manage</Link>
                 <div className="row1">
-                    <Link to="/Manage/Projects">Projects</Link>
-                    <Link to="/Manage/Members">Members</Link>
+                    <Link to="/Projects">Projects</Link>
+                    <Link to="/ManageCommittees">Committees</Link>
+                    <Link to="/ManageTasks">Tasks</Link>
                 </div>
 
             </div>
             
             <div className="row">
                 <FaCodeCommit/>
-                <Link to="/Committees">Committees</Link>
-            </div>
-            <div className="row">
                 <Link to="/Reports">Reports</Link>
             </div>
             <div className="row">
