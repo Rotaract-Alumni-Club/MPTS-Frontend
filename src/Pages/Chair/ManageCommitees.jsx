@@ -8,10 +8,11 @@ const ManageCommitees = () => {
   return (
     <>
 <Header />
-<SearchAndButton title1="Add Committees" title2="View Committees"/>
 <LeftNavChair />
 
-{/* <ProjectsTable /> */}
+
+<SearchAndButton title1="Add Committee" title2="View Committees"/> 
+
 
 </>
   )

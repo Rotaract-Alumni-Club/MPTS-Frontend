@@ -11,13 +11,16 @@
   gap:16px;
   padding:20px 40px;
   height:80px;
-  margin-left: 217px;
+  margin-left: 200px;
+  margin-top: 0px;
   background: linear-gradient(180deg, #DDD0FC 0%, #DDD0FC 100%);
   border-radius:0px;
   border:1px solid rgba(0,0,0,0.06);
   box-shadow: inset 0 -6px 10px rgba(0,0,0,0.03);
-  position:relative;
+  position:fixed;
   padding-left: 1250px;
+  top: 0;
+  width: calc(100% - 200px);
    cursor: default;          
   -webkit-user-select: none;
   -moz-user-select: none;
