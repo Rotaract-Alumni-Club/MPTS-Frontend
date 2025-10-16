@@ -55,7 +55,7 @@ const router= createBrowserRouter([
   //   errorElement:<div>Page Not Found</div>
   // }
   {
-    path:"/Tasks",
+    path:"/ManageTasks",
     element:<ManageTask/>,
     errorElement:<div>Page Not Found</div>
   },
