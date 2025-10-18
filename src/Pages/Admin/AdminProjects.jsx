@@ -10,7 +10,7 @@ const AdminProjects = () => {
   return (
     <div>
       {/* <LeftNavigationBar/> */}
-      <LeftNavChair />
+      <LeftNavigationBar />
       <SearchAndButton
       title1="Search Projects"
       title2="Add New Project"
