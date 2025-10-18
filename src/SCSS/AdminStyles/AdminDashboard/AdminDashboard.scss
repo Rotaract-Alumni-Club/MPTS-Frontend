@@ -38,15 +38,14 @@ body{
   background: #f6eef8;
   border-radius: 18px;
   padding: 32px;
+  padding-bottom: 48px;   /* ensure extra space below inputs so background "fits" */
   min-height: 520px;
   box-shadow: 0 6px 30px rgba(124,91,189,0.08);
-  box-sizing: border-box;
+  box-sizing: border-box; /* include padding in width/height calculations */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  /* center inner form horizontally if needed */
-  margin-right: 0;
 }
 
 .project-card h1{
@@ -54,6 +53,46 @@ body{
   font-size: 1.8rem;
   color: #4b2e6b;
   text-align: center;
+}
+
+/* make forms inside the card stretch and have consistent gaps */
+.project-card form,
+.project-card .form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;              /* space after each input row */
+  box-sizing: border-box;
+}
+
+/* ensure input-like elements fill the available width */
+.project-card input,
+.project-card textarea,
+.project-card select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  font-size: 14px;
+}
+
+/* if your form uses .form-row for side-by-side fields */
+.project-card .form-row {
+  display: flex;
+  gap: 16px;
+}
+.project-card .form-row > * {
+  flex: 1 1 0;
+}
+
+/* actions/buttons area should be separated from inputs */
+.project-card .form-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
 }
 
 /* calendar fixed width on right and vertically centered within the layout */
@@ -105,4 +144,10 @@ body{
     width: 100%;
     margin-top: 20px;
   }
+  .project-card{
+    padding: 24px;
+    padding-bottom: 32px;
+    min-height: auto;
+  }
+  .project-card .form-container { gap: 12px; }
 }

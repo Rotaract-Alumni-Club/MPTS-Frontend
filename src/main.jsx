@@ -9,6 +9,9 @@ import AdminProjects from './Pages/Admin/AdminProjects.jsx'
 import AdminCommittees from './Pages/Admin/AdminCommitees.jsx'
 import AdminDashboard from './Pages/Admin/AdminDashboard.jsx'
 import AdminAddProject from './Pages/Admin/AdminAddProject.jsx';
+import AdminAddMember from './Pages/Admin/AdminAddMember.jsx';
+import ManageCommittees from './Pages/Admin/AdminCommitees.jsx';
+
 
 
 
@@ -72,6 +75,16 @@ const router= createBrowserRouter([
   {
     path:"/AdminAddProjects",
     element:<AdminAddProject/>,
+    errorElement:<div>Page Not Found</div>
+  },
+  {
+    path:"/AdminAddMember",
+    element:<AdminAddMember/>,
+    errorElement:<div>Page Not Found</div>
+  },
+  {
+    path:"/AdminCommittees",
+    element:<ManageCommittees/>,
     errorElement:<div>Page Not Found</div>
   },
   {
