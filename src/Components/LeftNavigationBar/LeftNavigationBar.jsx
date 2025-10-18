@@ -29,7 +29,7 @@ function LeftNavigationBar() {
             <div className="row">
                 <NavLink to="/manage" className={linkClass}>Manage</NavLink>
                 <div className="row1">
-                    <NavLink to="/manageProjects" className={linkClass}>Projects</NavLink>
+                    <NavLink to="/AdminAddProjects" className={linkClass}>Projects</NavLink>
                     <NavLink to="/manageCommittees" className={linkClass}>Committees</NavLink>
                     <NavLink to="/manageTasks" className={linkClass}>Tasks</NavLink>
                 </div>
