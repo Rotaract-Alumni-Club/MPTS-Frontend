@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../Components/Header/Header'
 import TaskBar from '../../Components/SerachAnd/SearchAndButton'
 import LeftNavChair from '../../Components/chair Component/LeftNavChair'
 import AddTask from '../../Components/chair Component/AddTask'
+import ViewTasks from '../../Components/chair Component/ViewTask'
     
 
 const ManageTask = () => {
    const [activeView, setActiveView] = useState('add');
 
      const handleViewChange = (view) => {
-    setActiveView(view);
+    setActiveView('view');
   };
 
   return (
@@ -22,9 +23,12 @@ const ManageTask = () => {
     />
 
     {activeView === 'add' && <AddTask/>}
+    {activeView === 'view' && 
+    <p>hi</p>
+   }
   
     <LeftNavChair/>
-
+     
     </>
   )
 }
