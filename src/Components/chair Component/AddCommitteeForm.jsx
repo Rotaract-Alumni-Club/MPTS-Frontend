@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../../SCSS/ChairStyle/AddCommitteeForm.scss";
-
 
 const AddCommitteeForm = ({ projectId, onSuccess, onCancel }) => {
     const [formData, setFormData] = useState({
         committeeName: "",
-        description: "",
+        description: ""
     });
 
     const [allMembers, setAllMembers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredMembers, setFilteredMembers] = useState([]);
     const [selectedMembers, setSelectedMembers] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         fetchAllMembers();
@@ -38,13 +40,7 @@ const AddCommitteeForm = ({ projectId, onSuccess, onCancel }) => {
             setAllMembers(response.data.data || []);
         } catch (error) {
             console.error("Error fetching members:", error);
-            // Fallback dummy data for testing
-            setAllMembers([
-                { _id: "1", name: "Banula Silva", email: "banula@email.com" },
-                { _id: "2", name: "Siyumi Perera", email: "siyumi@email.com" },
-                { _id: "3", name: "Kamal Fernando", email: "kamal@email.com" },
-                { _id: "4", name: "Nimal Jayasinghe", email: "nimal@email.com" },
-            ]);
+            toast.warning("Couldn't connect to server");
         }
     };
 
@@ -58,18 +54,42 @@ const AddCommitteeForm = ({ projectId, onSuccess, onCancel }) => {
 
     const handleSelectMember = (member) => {
         if (!selectedMembers.find((m) => m._id === member._id)) {
-            setSelectedMembers([...selectedMembers, member]);
+            setSelectedMembers([...selectedMembers, member]); 
+        } else {
+            toast.info(`${member.name} is already added`);
         }
         setSearchQuery("");
         setFilteredMembers([]);
     };
 
     const handleRemoveMember = (memberId) => {
+        const member = selectedMembers.find(m => m._id === memberId);
         setSelectedMembers(selectedMembers.filter((m) => m._id !== memberId));
+        if (member) {
+            toast.info(`${member.name} removed from committee`);
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validation
+        if (!formData.committeeName.trim()) {
+            toast.error("Please enter a committee name");
+            return;
+        }
+
+        if (!formData.description.trim()) {
+            toast.error("Please enter a description");
+            return;
+        }
+
+        if (selectedMembers.length === 0) {
+            toast.warning("Please add at least one member to the committee");
+            return;
+        }
+
+        setIsSubmitting(true);
         
         try {
             const committeeData = {
@@ -82,55 +102,100 @@ const AddCommitteeForm = ({ projectId, onSuccess, onCancel }) => {
                     Role: "Member"
                 }))
             };
-console.log("Sending committee data:", committeeData); 
+
+            console.log("Sending committee data:", committeeData); 
 
             const response = await axios.post(
                 "http://localhost:5000/api/committee/add",
                 committeeData
             );
+
+            // Success notification
+            toast.success(
+                `✅ ${response.data.message || "Committee created successfully!"}`,
+                {
+                    position: "top-center",
+                    autoClose: 3000,
+                }
+            );
             
             // Reset form
             setFormData({
                 committeeName: "",
-                description: "",
+                description: ""
             });
             setSelectedMembers([]);
             
-            if (onSuccess) onSuccess();
+            // Call success callback after a short delay
+            setTimeout(() => {
+                if (onSuccess) onSuccess();
+            }, 1500);
+
         } catch (error) {
             console.error("Error adding committee:", error);
+            
+            // Error notification with specific message
+            const errorMessage = 
+                error.response?.data?.message || 
+                error.response?.data?.error || 
+                "Failed to create committee. Please try again.";
+            
+            toast.error(
+                `❌ ${errorMessage}`,
+                {
+                    position: "top-center",
+                    autoClose: 5000,
+                }
+            );
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     return (
         <div className="add-committee-form-container">
+            <ToastContainer 
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+            
             <form onSubmit={handleSubmit} className="add-committee-form">
                 <div className="form-group">
-                    <label>Committee Name</label>
+                    <label>Committee Name *</label>
                     <input
                         type="text"
                         name="committeeName"
                         value={formData.committeeName}
                         onChange={handleChange}
                         placeholder="Enter committee name"
+                        disabled={isSubmitting}
                         required
                     />
                 </div>
 
                 <div className="form-group">
-                    <label>Description</label>
+                    <label>Description *</label>
                     <textarea
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
                         placeholder="Enter committee description"
                         rows="4"
+                        disabled={isSubmitting}
                         required
                     />
                 </div>
 
                 <div className="form-group">
-                    <label>Search and Add Members</label>
+                    <label>Search and Add Members *</label>
                     <div className="search-input-wrapper">
                         <FaSearch className="search-icon" />
                         <input
@@ -140,12 +205,14 @@ console.log("Sending committee data:", committeeData);
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="search-input"
                             autoComplete="off"
+                            disabled={isSubmitting}
                         />
                         {searchQuery && (
                             <button
                                 type="button"
                                 className="clear-search"
                                 onClick={() => setSearchQuery("")}
+                                disabled={isSubmitting}
                             >
                                 <FaTimes />
                             </button>
@@ -197,6 +264,7 @@ console.log("Sending committee data:", committeeData);
                                         type="button"
                                         className="remove-member-btn"
                                         onClick={() => handleRemoveMember(member._id)}
+                                        disabled={isSubmitting}
                                     >
                                         <FaTimes />
                                     </button>
@@ -207,11 +275,27 @@ console.log("Sending committee data:", committeeData);
                 )}
 
                 <div className="form-actions">
-                    <button type="submit" className="btn-submit">
-                        Add Committee
+                    <button 
+                        type="submit" 
+                        className="btn-submit"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? (
+                            <>
+                                <span className="spinner"></span>
+                                Creating...
+                            </>
+                        ) : (
+                            "Add Committee"
+                        )}
                     </button>
                     {onCancel && (
-                        <button type="button" className="btn-cancel" onClick={onCancel}>
+                        <button 
+                            type="button" 
+                            className="btn-cancel" 
+                            onClick={onCancel}
+                            disabled={isSubmitting}
+                        >
                             Cancel
                         </button>
                     )}
