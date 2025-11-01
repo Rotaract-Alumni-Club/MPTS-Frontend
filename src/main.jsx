@@ -54,15 +54,11 @@ const router= createBrowserRouter([
     element:<ManageCommittees/>,
     errorElement:<div>Page Not Found</div>
   },
-  {
-  }
   
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <RouterProvider router={router}/> */}
-    <AdminDashboard/>
-
-  </StrictMode>,
+    <RouterProvider router={router}/>
+</StrictMode>,
 )
