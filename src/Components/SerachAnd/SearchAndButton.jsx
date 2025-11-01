@@ -10,7 +10,7 @@ const TaskBar = ({title1, title2, onAddClick, onViewClick, activeView}) => {
     React.useEffect(() => {
         setState1(activeView === 'add');
         setState2(activeView === 'view');
-    }, [activeView]);
+    }, [activeView]); 
 
     const click1 = () => {
         setState1(true);
