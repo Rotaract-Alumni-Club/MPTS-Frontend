@@ -6,12 +6,25 @@ import AddTask from '../../Components/chair Component/AddTask'
     
 
 const ManageTask = () => {
+   const [activeView, setActiveView] = useState('add');
+
+     const handleViewChange = (view) => {
+    setActiveView(view);
+  };
+
   return (
     <>
     <Header/>
-    <TaskBar title1="Add Tasks" title2="View Tasks"/>
+    <TaskBar title1="Add Tasks" title2="View Tasks"
+     onAddClick={() => handleViewChange('add')}
+        onViewClick={() => handleViewChange('view')}
+        activeView={activeView}
+    />
+
+    {activeView === 'add' && <AddTask/>}
+  
     <LeftNavChair/>
-    <AddTask/>
+
     </>
   )
 }

@@ -1,20 +1,37 @@
+$bg: #f8f9fa;
+$card: #ffffff;
+$primary: #007bff;
+$muted: #6b7280;
+$accent: #eaf3ff;
+$radius: 10px;
+
 .add-task {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px;
-  background: #f8f9fa;
-  margin-left: 200px;
-  height: 500px;
-  width: 1000px;
+  display: block;
+  max-width: 1500px;
+  margin: 40px 24px;
+  margin-left: 200px; /* keep existing layout offset; remove if you want centered layout */
+  padding: 28px;
+  background: $bg;
+  border-radius: $radius;
+  box-shadow: 0 8px 20px rgba(12, 20, 35, 0.06);
+  color: #0f172a;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  
+ .table-wrapper {
+    width: 100%;
+    overflow: auto;
+    border-radius: $radius;
+    background: transparent;
+  }
 
   table {
     width: 100%;
+    min-width: 700px;
     border-collapse: collapse;
-    background-color: #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    background-color: $card;
+    border-radius: $radius;
     overflow: visible;
+    box-shadow: 0 4px 10px rgba(2,6,23,0.04);
 
     th, td {
       border: 1px solid #ddd;

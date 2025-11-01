@@ -3,7 +3,8 @@ import '../../SCSS/ChairStyle/AddTask.scss'
 
 const AddTask = () => {
   return (
-    <div>
+     <div className="add-task">
+      <div className="table-wrapper">
         <table border="3" >
             <tr>
                 <th>Task Name</th>
@@ -48,6 +49,7 @@ const AddTask = () => {
                 <td><input type="text"/></td>
             </tr>
         </table>
+    </div>
     </div>
   )
 }
