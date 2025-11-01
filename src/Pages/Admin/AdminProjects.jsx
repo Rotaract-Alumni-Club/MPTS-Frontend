@@ -3,15 +3,20 @@ import {FaSearch,FaPlus,FaFilter} from 'react-icons/fa'
 import '../../SCSS/AdminStyles/AdminProjectStyles/AdminProjects.scss'
 import SearchAndButton from '../../Components/SerachAnd/SearchAndButton.jsx'
 import ProjectsTable from '../../Components/AdminComponents/ProjectsTable.jsx'
+import LeftNavigationBar from '../../Components/LeftNavigationBar/LeftNavigationBar.jsx'
+import LeftNavChair from '../../Components/chair Component/LeftNavChair.jsx'
 
 const AdminProjects = () => {
   return (
     <div>
-      <div><SearchAndButton
+      {/* <LeftNavigationBar/> */}
+      <LeftNavigationBar />
+      <SearchAndButton
       title1="Search Projects"
       title2="Add New Project"
       />
-      </div>
+      
+      
       
       
       <div className='search_bar'>
@@ -27,6 +32,7 @@ const AdminProjects = () => {
       <h2>Recently Accessed</h2>
 
       < ProjectsTable />
+      
 
       
       

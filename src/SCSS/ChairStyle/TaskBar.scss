@@ -10,6 +10,8 @@
   box-shadow: 0 10px 22px rgba(38, 38, 38, 0.12);
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   user-select: none;
+  margin-left: 550px;
+  margin-top: 100px;
 }
 
 .TaskBar > div {
@@ -33,7 +35,6 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
-/* Right "View" segment (soft purple) */
 .TaskBar .view {
   background: linear-gradient(180deg, #f3f3f3 0%, #e9e9e9 100%);
   color: #0f172a;
@@ -45,18 +46,18 @@
 
 /* change .white to set text color (not background) */
 .white{
-  color: #0f172a;
+  color: #000000;
 }
 
 /* active segment styles (applies when your JSX adds 'active') */
 .TaskBar .add.active,
 .TaskBar .view.active {
-  background: linear-gradient(180deg, #f6ecff 0%, #3a235c 100%);
-  color: #fff;
+  background: linear-gradient(180deg, #f6ecff 0%, #efe1ff 100%);
+  color: #000000;
 }
 .TaskBar .add.active h3,
 .TaskBar .view.active h3 {
-  color: #fff;
+  color: #000000;
 }
 
 

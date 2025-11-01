@@ -8,6 +8,11 @@
   padding: 20px 16px;
   border-radius: 0;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+     cursor: default;          
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 100;
 
 
