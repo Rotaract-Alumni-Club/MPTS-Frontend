@@ -1,24 +1,10 @@
-import { FaArrowAltCircleLeft,FaArrowAltCircleRight } from "react-icons/fa";
-import SearchAndButton from "../../Components/SerachAnd/SearchAndButton";
-import "../../SCSS/AdminStyles/AdminCommitees/Manage Committees.scss"
-import Header from "../../Components/Header/Header";
-import LeftNavigationBar from "../../Components/LeftNavigationBar/LeftNavigationBar";
+import React from 'react'
+import "../../SCSS/AdminStyles/AdminCommitees/AdminCommittees.scss"
 
-
-const ManageCommittees = () => {
-    return (
-        <div>
-            <Header/>
-            <LeftNavigationBar/>
-            {/* <h2>Manage Committees Page</h2> */}
-
-            <div className="searchandbutton"><SearchAndButton
-            title1="Search Committees"
-            title2="Add New Committee"
-            />
-            </div>
-            <br />
-            <div className="commitee">
+const MemberTableComponent = () => {
+  return (
+    <div>
+        <div className="commitee">
                 <h3>Committee 1</h3>
                 <p>Details about Committee 1</p>
                 <table>
@@ -68,14 +54,9 @@ const ManageCommittees = () => {
                 <br />
                 <br />
             </div>
-
-            <div className="arrowbutton">
-                <button> <FaArrowAltCircleLeft/></button> &nbsp; &nbsp; &nbsp; &nbsp;
-                <button> <FaArrowAltCircleRight/></button>
-            </div>
-
-       </div>
-    );
+      
+    </div>
+  )
 }
 
-export default ManageCommittees;
+export default MemberTableComponent

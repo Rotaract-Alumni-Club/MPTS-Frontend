@@ -8,24 +8,35 @@ body {
 .commitee {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* center the table horizontally and vertically inside the frame */
+    justify-content: center;    /* vertical centering of the table inside the frame */
+    align-items: center;        /* center horizontally */
     margin-top: 32px;
     background: #e4d4f6; // Light purple background for the frame
     border-radius: 32px;
     box-shadow: 0 2px 12px rgba(124, 91, 189, 0.08);
     padding: 32px 24px;
-    width: fit-content;
-    min-width: 400px;
+    width: 70%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 360px;
 }
 
+/* make the table centered inside the frame */
 .commitee table {
     border-collapse: separate;
     border-spacing: 32px 0;
     background: none;
+    margin: 0 auto;   /* center horizontally */
+    width: auto;
 }
 
+/* optional: keep cards from stretching beyond the right edge */
 .commitee th,
 .commitee td {
+    max-width: 240px;
     background: #e4d4f6;
     border-radius: 24px;
     min-width: 180px;
@@ -104,7 +115,55 @@ body {
 }
 
 .arrowbutton {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.arrowbutton button {
+  background: #f1eaf8; /* soft circle bg */
+  color: #6b3fa8;      /* icon color */
+  border: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(124,91,189,0.08);
+  transition: transform .14s ease, background .14s ease, color .14s ease, box-shadow .14s ease;
+}
+
+.arrowbutton button svg {
+  width: 22px;
+  height: 22px;
+  color: currentColor; /* ensures icon follows button color */
+  display: block;
+}
+
+.arrowbutton button:hover {
+  background: #7c5bbd;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(124,91,189,0.14);
+}
+
+.arrowbutton button:focus {
+  outline: 3px solid rgba(124,91,189,0.18);
+  outline-offset: 2px;
+}
+
+/* responsive: slightly smaller buttons on narrow screens */
+@media (max-width: 480px) {
+  .arrowbutton {
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .arrowbutton button {
+    width: 44px;
+    height: 44px;
+  }
 }

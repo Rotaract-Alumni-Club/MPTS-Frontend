@@ -10,20 +10,144 @@ body{
   align-items: flex-start;
 }
 
-.project-card {
-  background: #492b68;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(124, 91, 189, 0.12);
-  padding: 32px 24px;
-  min-width: 400px;
-  min-height: 500px;
+/* layout: form left (centered area) and calendar right (vertically centered)
+   Assumes left nav is a fixed/side bar. Adjust --sidebar-width if needed. */
+:root {
+  --sidebar-width: 220px; /* change to match your LeftNavigationBar width */
+  --calendar-width: 360px;
+  --content-gap: 40px;
 }
 
-.calendar-container {
-  background: #3f255e;
+.admin-add-layout{
+  display: flex;
+  gap: var(--content-gap);
+  align-items: center;               /* vertical center of children */
+  justify-content: space-between;    /* keep calendar on right */
+  padding: 32px;
+  min-height: calc(100vh - 120px);   /* center vertically in viewport (tweak if header height differs) */
+  box-sizing: border-box;
+  margin-left: var(--sidebar-width); /* avoid overlapping left navigation */
+  /* keep content away from page edges */
+  margin-right: 24px;
+}
+
+/* form card on left - take remaining space but leave room for calendar */
+.project-card{
+  flex: 1 1 0;
+  max-width: calc(100% - var(--calendar-width) - var(--content-gap));
+  background: #f6eef8;
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(124, 91, 189, 0.12);
-  padding: 24px 18px;
-  min-width: 340px;
-  
+  padding: 32px;
+  padding-bottom: 48px;   /* ensure extra space below inputs so background "fits" */
+  min-height: 520px;
+  box-shadow: 0 6px 30px rgba(124,91,189,0.08);
+  box-sizing: border-box; /* include padding in width/height calculations */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.project-card h1{
+  margin-bottom: 24px;
+  font-size: 1.8rem;
+  color: #4b2e6b;
+  text-align: center;
+}
+
+/* make forms inside the card stretch and have consistent gaps */
+.project-card form,
+.project-card .form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;              /* space after each input row */
+  box-sizing: border-box;
+}
+
+/* ensure input-like elements fill the available width */
+.project-card input,
+.project-card textarea,
+.project-card select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  font-size: 14px;
+}
+
+/* if your form uses .form-row for side-by-side fields */
+.project-card .form-row {
+  display: flex;
+  gap: 16px;
+}
+.project-card .form-row > * {
+  flex: 1 1 0;
+}
+
+/* actions/buttons area should be separated from inputs */
+.project-card .form-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+/* calendar fixed width on right and vertically centered within the layout */
+.calendar-container{
+  flex: 0 0 var(--calendar-width);
+  width: var(--calendar-width);
+  background: #e9e0f6;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 6px 30px rgba(124,91,189,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ensure react-calendar fits container */
+.calendar-container .react-calendar{
+  width: 100%;
+  border: none;
+  background: transparent;
+}
+
+/* small styling for selected-date text */
+.selected-date{
+  margin-top: 12px;
+  color: #4b2e6b;
+  font-size: 0.95rem;
+}
+
+/* responsive: stack on small screens */
+@media (max-width: 1000px){
+  :root {
+    --sidebar-width: 0;
+    --calendar-width: 100%;
+  }
+  .admin-add-layout{
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    margin-left: 0;
+  }
+  .project-card{
+    max-width: 100%;
+    min-height: 360px;
+  }
+  .calendar-container{
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .project-card{
+    padding: 24px;
+    padding-bottom: 32px;
+    min-height: auto;
+  }
+  .project-card .form-container { gap: 12px; }
 }
