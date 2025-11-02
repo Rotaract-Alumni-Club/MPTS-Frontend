@@ -1,6 +1,7 @@
+// ...existing code...
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaTrash, FaEdit, FaSave, FaTimes, FaUsers } from "react-icons/fa";
+import { FaTrash, FaUsers } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import ConfirmDialog from "../ConfirmationComponent/ConfirmDialog";
 import "../../SCSS/ChairStyle/ViewTasks.scss";
@@ -23,12 +24,12 @@ const ViewTasks = () => {
   const fetchTasks = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/task/get");
-      const taskData = res.data.data || res.data;
-
-      // Group by Committee
+      const taskData = res.data.data || res.data || [];
+      // Group by Committee (use empty string key if none)
       const grouped = taskData.reduce((acc, task) => {
-        if (!acc[task.Committee]) acc[task.Committee] = [];
-        acc[task.Committee].push(task);
+        const key = task.Committee || "Unassigned";
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(task);
         return acc;
       }, {});
       setGroupedTasks(grouped);
@@ -41,7 +42,7 @@ const ViewTasks = () => {
   const fetchMembers = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/user/all");
-      setMembers(res.data.data || res.data);
+      setMembers(res.data.data || res.data || []);
     } catch (err) {
       console.error("Error fetching members:", err);
     }
@@ -83,9 +84,11 @@ const ViewTasks = () => {
     const { type, committeeName, taskId } = confirmDialog;
     try {
       if (type === "committee") {
-        await axios.delete(`http://localhost:5000/api/task/delete/committee/${committeeName}`);
+        // call backend to delete all tasks for committee
+        await axios.delete(`http://localhost:5000/api/task/delete/committee/${encodeURIComponent(committeeName)}`);
         toast.success(`Deleted all tasks under ${committeeName}`);
       } else {
+        // delete single task by id
         await axios.delete(`http://localhost:5000/api/task/delete/${taskId}`);
         toast.success("Task deleted successfully");
       }
@@ -102,19 +105,14 @@ const ViewTasks = () => {
     <div className="view-tasks-container">
       <ToastContainer />
 
-      {/* Confirmation Dialog */}
       <ConfirmDialog
         isOpen={confirmDialog.isOpen}
-        title={
-          confirmDialog.type === "committee"
-            ? `Delete Committee "${confirmDialog.committeeName}"?`
-            : "Delete Task?"
-        }
-        message={
-          confirmDialog.type === "committee"
-            ? `This will remove all tasks under ${confirmDialog.committeeName}.`
-            : "Are you sure you want to delete this task?"
-        }
+        title={confirmDialog.type === "committee"
+          ? `Delete Committee "${confirmDialog.committeeName}"?`
+          : "Delete Task?"}
+        message={confirmDialog.type === "committee"
+          ? `This will remove all tasks under ${confirmDialog.committeeName}.`
+          : "Are you sure you want to delete this task?"}
         onConfirm={confirmDelete}
         onCancel={closeConfirmDialog}
         confirmText="Delete"
@@ -126,15 +124,15 @@ const ViewTasks = () => {
           <p>No tasks found</p>
         </div>
       ) : (
-        <div className="committee-grid">
+        <div className="committees-grid">
           {Object.entries(groupedTasks).map(([committeeName, tasks]) => (
             <div key={committeeName} className="committee-card">
               <div className="committee-header">
                 <h3>{committeeName}</h3>
                 <button
-                  className="delete-committee-btn"
+                  className="btn-delete-committee"
                   onClick={() => openConfirmDialog("committee", committeeName)}
-                  title="Delete committee tasks"
+                  title="Delete all tasks for this committee"
                 >
                   <FaTrash />
                 </button>
@@ -143,14 +141,14 @@ const ViewTasks = () => {
               <div className="tasks-list">
                 {tasks.map((task) => (
                   <div key={task._id} className="task-row">
-                    <div className="task-info">
-                      <h4>{task.TName}</h4>
+                    <div className="task-main">
+                      <h4 className="task-name">{task.TName}</h4>
                       <p className="description">{task.Description}</p>
                       <p className="dates">
                         <strong>Start:</strong>{" "}
-                        {new Date(task.StartDate).toLocaleDateString()} |{" "}
-                        <strong>End:</strong>{" "}
-                        {new Date(task.EndDate).toLocaleDateString()}
+                        {task.StartDate ? new Date(task.StartDate).toLocaleDateString() : "-"}{" "}
+                        | <strong>End:</strong>{" "}
+                        {task.EndDate ? new Date(task.EndDate).toLocaleDateString() : "-"}
                       </p>
                     </div>
 
@@ -169,15 +167,16 @@ const ViewTasks = () => {
                           ))}
                         </select>
                       </div>
-                      <button
-                        className="delete-task-btn"
-                        onClick={() =>
-                          openConfirmDialog("task", task.TName, task._id)
-                        }
-                        title="Delete task"
-                      >
-                        <FaTrash />
-                      </button>
+
+                      <div className="task-actions">
+                        <button
+                          className="btn-delete-task"
+                          onClick={() => openConfirmDialog("task", task.TName, task._id)}
+                          title="Delete task"
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -191,3 +190,4 @@ const ViewTasks = () => {
 };
 
 export default ViewTasks;
+// ...existing code...
