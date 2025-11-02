@@ -3,12 +3,17 @@ import Header from '../../Components/Header/Header'
 import LeftNavChair from '../../Components/chair Component/LeftNavChair'
 import SearchAndButton from '../../Components/SerachAnd/SearchAndButton'
 import AddCommitteeForm from '../../Components/chair Component/AddCommitteeForm'
+import ViewCommittees from '../../Components/chair Component/ViewCommitees'
 
 const ManageCommitees = () => {
   const [activeView, setActiveView] = useState('add');
 
   const handleViewChange = (view) => {
     setActiveView(view);
+  };
+
+    const handleCommitteeAdded = () => {
+    setActiveView('view');
   };
 
   return (
@@ -22,11 +27,9 @@ const ManageCommitees = () => {
         onViewClick={() => handleViewChange('view')}
         activeView={activeView}
       /> 
-      
-      {activeView === 'add' && <AddCommitteeForm />}
-      {activeView === 'view' && (
-        <p>hi</p>
-      )}
+
+      {activeView === 'add' && <AddCommitteeForm onCommitteeAdded={handleCommitteeAdded} />}
+      {activeView === 'view' && <ViewCommittees />}
     </div>
   )
 }
