@@ -23,8 +23,7 @@ const ManageTask = () => {
     />
 
     {activeView === 'add' && <AddTask/>}
-    {activeView === 'view' && 
-    <p>hi</p>
+    {activeView === 'view' && <ViewTasks/>
    }
   
     <LeftNavChair/>

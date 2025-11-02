@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaTrash, FaEdit, FaSave, FaTimes, FaUsers } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-//import ConfirmDialog from "../ConfirmationComponent/ConfirmDialog";
+import ConfirmDialog from "../ConfirmationComponent/ConfirmDialog";
 import "../../SCSS/ChairStyle/ViewTasks.scss";
 
 const ViewTasks = () => {
@@ -22,7 +22,7 @@ const ViewTasks = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/task/all");
+      const res = await axios.get("http://localhost:5000/api/task/get");
       const taskData = res.data.data || res.data;
 
       // Group by Committee
@@ -50,7 +50,7 @@ const ViewTasks = () => {
   const handleMemberChange = async (taskId, e) => {
     const selected = Array.from(e.target.selectedOptions).map((opt) => opt.value);
     try {
-      await axios.put(`http://localhost:5000/api/task/update/${taskId}`, {
+      await axios.put(`http://localhost:5000/api/task/updateAssigned/${taskId}`, {
         AssignedTo: selected,
       });
       toast.success("Assigned members updated");
@@ -83,7 +83,7 @@ const ViewTasks = () => {
     const { type, committeeName, taskId } = confirmDialog;
     try {
       if (type === "committee") {
-        await axios.delete(`http://localhost:5000/api/task/deleteByCommittee/${committeeName}`);
+        await axios.delete(`http://localhost:5000/api/task/delete/committee/${committeeName}`);
         toast.success(`Deleted all tasks under ${committeeName}`);
       } else {
         await axios.delete(`http://localhost:5000/api/task/delete/${taskId}`);
