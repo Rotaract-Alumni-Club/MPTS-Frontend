@@ -1,48 +1,88 @@
+// 🎨 Theme Variables
 $bg: #f8f9fa;
 $card: #ffffff;
-$primary: #007bff;
+$primary: #9b87f5;
+$secondary: #b8a4f5;
 $muted: #6b7280;
-$accent: #eaf3ff;
-$radius: 10px;
+$accent: #f4efff;
+$radius: 12px;
 
 .add-task {
-  display: block;
-  max-width: 1500px;
-  margin: 40px 24px;
-  margin-left: 200px; /* keep existing layout offset; remove if you want centered layout */
-  padding: 28px;
-  background: $bg;
-  border-radius: $radius;
-  box-shadow: 0 8px 20px rgba(12, 20, 35, 0.06);
-  color: #0f172a;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  margin-left: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 
   .table-wrapper {
     width: 100%;
-    overflow: auto;
-    border-radius: $radius;
-    background: transparent;
+    max-width: 1400px;
+    background: #e4d4f6;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
+  // 🧭 Committee Selection (Top Dropdown)
+  .committee-selection {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    select {
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      background: #fff;
+      transition: all 0.3s ease;
+      width: 300px;
+
+      &:hover {
+        border-color: $primary;
+        background: #f8f6ff;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba(155, 135, 245, 0.15);
+      }
+    }
+  }
+
+  // 🗒️ Task Table
   table {
     width: 100%;
-    min-width: 700px;
     border-collapse: collapse;
     background-color: $card;
-    border-radius: $radius;
-    overflow: visible;
-    box-shadow: 0 4px 10px rgba(2, 6, 23, 0.04);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(155, 135, 245, 0.1);
 
     th,
     td {
-      border: 1px solid #ddd;
-      padding: 12px 16px;
+      padding: 14px 18px;
       text-align: center;
+      font-size: 14px;
+      border-bottom: 1px solid #eaeaea;
     }
 
     th {
-      background-color: $primary;
-      color: #fff;
+      background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+      color: white;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -50,84 +90,183 @@ $radius: 10px;
 
     tr:hover {
       background-color: $accent;
-      transition: 0.3s ease;
+      transition: background 0.3s ease;
     }
 
-    input {
-      width: 95%;
-      padding: 8px 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-      font-size: 14px;
-      transition: border 0.3s, box-shadow 0.3s;
-
-      &::placeholder {
-        color: #aaa;
-      }
-
-      &:focus {
-        border-color: $primary;
-        box-shadow: 0 0 0 3px rgba($primary, 0.15);
-      }
-    }
-
-    /* ✅ Dropdown styling (Committee + Assigned Members) */
+    input,
     select {
       width: 95%;
-      padding: 8px 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
       font-size: 14px;
-      background-color: #fff;
-      color: #0f172a;
-      transition: border 0.3s, box-shadow 0.3s, background-color 0.3s;
-      outline: none;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba(155, 135, 245, 0.1);
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    button {
+      background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
       cursor: pointer;
-      appearance: none; /* removes default browser arrow */
-      background-image: linear-gradient(45deg, transparent 50%, $primary 50%),
-        linear-gradient(135deg, $primary 50%, transparent 50%);
-      background-position: calc(100% - 15px) calc(50% - 3px),
-        calc(100% - 10px) calc(50% - 3px);
-      background-size: 5px 5px, 5px 5px;
-      background-repeat: no-repeat;
+      transition: all 0.3s ease;
 
       &:hover {
-        border-color: #007bff;
-        background-color: $accent;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(155, 135, 245, 0.3);
+      }
+    }
+  }
+
+  // 👥 Assigned Member Chips
+  .assigned-members {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .selected-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 90%;
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      background: #fff;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: $primary;
+        background: #f8f6ff;
       }
 
       &:focus {
         border-color: $primary;
-        box-shadow: 0 0 0 3px rgba($primary, 0.15);
+        box-shadow: 0 0 0 3px rgba(155, 135, 245, 0.1);
+      }
+    }
+  }
+
+  .member-chip {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+    color: white;
+    border-radius: 25px;
+    padding: 6px 12px;
+    margin: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(155, 135, 245, 0.3);
+    }
+
+    button {
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-left: 6px;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+
+  // 🧾 Submit Section
+  .submit-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+
+    .btn-submit {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+      color: white;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(155, 135, 245, 0.4);
       }
 
-      option {
-        padding: 6px 10px;
+      &:active {
+        transform: translateY(0);
       }
     }
   }
 }
 
-.member-chip {
-  display: inline-flex;
-  align-items: center;
-  background-color: #eaf3ff;
-  color: #0f172a;
-  border-radius: 15px;
-  padding: 4px 10px;
-  margin: 3px;
-  font-size: 13px;
+// 🧩 Scrollbar for wide tables
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
 
-  button {
-    border: none;
-    background: none;
-    color: #555;
-    font-weight: bold;
-    margin-left: 6px;
-    cursor: pointer;
-    &:hover {
-      color: red;
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 10px;
+
+  &:hover {
+    background: #9b87f5;
+  }
+}
+
+// 📱 Responsive Design
+@media (max-width: 1024px) {
+  .add-task {
+    margin-left: 0;
+    padding: 20px;
+
+    .table-wrapper {
+      padding: 25px;
+    }
+
+    table {
+      font-size: 13px;
+
+      th,
+      td {
+        padding: 10px;
+      }
     }
   }
 }
