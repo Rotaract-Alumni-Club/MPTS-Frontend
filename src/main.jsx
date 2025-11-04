@@ -28,7 +28,7 @@ const router= createBrowserRouter([
     element: <ManageCommitees/>,
     errorElement:<div>Page Not Found</div>
   },
- 
+
   {
     path:"/ManageTasks",
     element:<ManageTask/>,
@@ -55,9 +55,6 @@ const router= createBrowserRouter([
     errorElement:<div>Page Not Found</div>
   },
   {
-    path:"/AdminDashboard",
-    element:<AdminDashboard/>,
-    errorElement:<div>Page Not Found</div>
   }
   
 ])
@@ -65,5 +62,5 @@ const router= createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router}/>
-  </StrictMode>,
+</StrictMode>,
 )
