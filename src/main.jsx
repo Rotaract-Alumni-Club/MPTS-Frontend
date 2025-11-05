@@ -12,6 +12,7 @@ import AdminDashboard from './Pages/Admin/AdminDashboard.jsx'
 import AdminAddProject from './Pages/Admin/AdminAddProject.jsx';
 import AdminAddMember from './Pages/Admin/AdminAddMember.jsx';
 import ManageCommittees from './Pages/Admin/AdminCommitees.jsx';
+import AdminViewAccount from './Pages/Admin/AdminViewAccount.jsx';
 
 
 
@@ -54,6 +55,13 @@ const router= createBrowserRouter([
     element:<ManageCommittees/>,
     errorElement:<div>Page Not Found</div>
   },
+  {
+    path:"/AdminViewAccount",
+    element:<AdminViewAccount/>,
+    errorElement:<div>Page Not Found</div>
+  },
+  {
+  }
   
 ])
 

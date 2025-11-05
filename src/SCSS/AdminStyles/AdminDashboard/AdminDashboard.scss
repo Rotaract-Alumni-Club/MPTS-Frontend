@@ -1,71 +1,112 @@
-body{
-    background-color: rgb(114, 99, 167);
-    color: #3f255e;
-}
-
-
-.dashboard-flex {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-}
-
-/* layout: form left (centered area) and calendar right (vertically centered)
-   Assumes left nav is a fixed/side bar. Adjust --sidebar-width if needed. */
 :root {
+  --page-bg: #f7f5fb;
+  --text: #2f2540;
+  --muted: #6b597e;
+  --accent: #7c5bbd;
+  --card-bg: #ffffff;
+  --card-soft: #f3eefe;
+  --calendar-bg: #eef0f8;
+  --shadow: 0 6px 30px rgba(124,91,189,0.06);
+
   --sidebar-width: 220px; /* change to match your LeftNavigationBar width */
   --calendar-width: 360px;
   --content-gap: 40px;
 }
 
+body{
+  background-color: var(--page-bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* page frame that contains entire dashboard - fits everything into one centered page */
+.admin-dashboard-page {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* the visible framed card that holds header / left nav (rendered elsewhere) and page content */
+.admin-dashboard-page .dashboard-frame {
+  width: 100%;
+  max-width: 1260px;        /* overall page fit width */
+  min-height: calc(100vh - 48px);
+  background: linear-gradient(180deg, #fff 0%, #fbf7ff 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(50,20,80,0.06);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;         /* keep inner layout inside the frame */
+  border: 1px solid rgba(124,91,189,0.06);
+}
+
+/* ensure dashboard-flex content fits inside the frame and doesn't push outside */
+.dashboard-flex {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* page layout */
 .admin-add-layout{
   display: flex;
   gap: var(--content-gap);
   align-items: center;               /* vertical center of children */
-  justify-content: space-between;    /* keep calendar on right */
+  justify-content: center;           /* center the whole layout */
   padding: 32px;
-  min-height: calc(100vh - 120px);   /* center vertically in viewport (tweak if header height differs) */
+  min-height: calc(100vh - 120px);
   box-sizing: border-box;
-  margin-left: var(--sidebar-width); /* avoid overlapping left navigation */
-  /* keep content away from page edges */
+  margin-left: var(--sidebar-width); /* reserve left nav space */
   margin-right: 24px;
+  width: calc(100% - var(--sidebar-width) - 48px);
+  max-width: 1260px;
+  margin-inline: auto;
 }
 
-/* form card on left - take remaining space but leave room for calendar */
+/* form card on left */
 .project-card{
   flex: 1 1 0;
   max-width: calc(100% - var(--calendar-width) - var(--content-gap));
-  background: #f6eef8;
+  background: linear-gradient(180deg, var(--card-bg) 0%, var(--card-soft) 100%);
   border-radius: 18px;
   padding: 32px;
-  padding-bottom: 48px;   /* ensure extra space below inputs so background "fits" */
+  padding-bottom: 48px;
   min-height: 520px;
-  box-shadow: 0 6px 30px rgba(124,91,189,0.08);
-  box-sizing: border-box; /* include padding in width/height calculations */
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  border: 1px solid rgba(124,91,189,0.08);
 }
 
+/* heading */
 .project-card h1{
   margin-bottom: 24px;
   font-size: 1.8rem;
-  color: #4b2e6b;
+  color: var(--text);
   text-align: center;
 }
 
-/* make forms inside the card stretch and have consistent gaps */
+/* form layout inside card */
 .project-card form,
 .project-card .form-container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;              /* space after each input row */
+  gap: 16px;
   box-sizing: border-box;
 }
 
-/* ensure input-like elements fill the available width */
+/* inputs full width and visually consistent */
 .project-card input,
 .project-card textarea,
 .project-card select {
@@ -73,12 +114,13 @@ body{
   box-sizing: border-box;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
   background: #fff;
   font-size: 14px;
+  color: var(--text);
 }
 
-/* if your form uses .form-row for side-by-side fields */
+/* grouped row */
 .project-card .form-row {
   display: flex;
   gap: 16px;
@@ -87,7 +129,7 @@ body{
   flex: 1 1 0;
 }
 
-/* actions/buttons area should be separated from inputs */
+/* actions/buttons */
 .project-card .form-actions {
   margin-top: 12px;
   display: flex;
@@ -95,35 +137,201 @@ body{
   justify-content: flex-start;
 }
 
-/* calendar fixed width on right and vertically centered within the layout */
+/* calendar card on right */
 .calendar-container{
   flex: 0 0 var(--calendar-width);
   width: var(--calendar-width);
-  background: #e9e0f6;
+  background: linear-gradient(180deg, var(--calendar-bg) 0%, #f6f4fb 100%);
   border-radius: 18px;
   padding: 18px;
-  box-shadow: 0 6px 30px rgba(124,91,189,0.08);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(124,91,189,0.08);
 }
 
-/* ensure react-calendar fits container */
+/* calendar sizing */
 .calendar-container .react-calendar{
   width: 100%;
   border: none;
   background: transparent;
 }
 
-/* small styling for selected-date text */
+/* selected date text */
 .selected-date{
   margin-top: 12px;
-  color: #4b2e6b;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
-/* responsive: stack on small screens */
+/* Sidebar profile */
+.sidebar-profile {
+  text-align: center;
+  padding: 22px;
+  max-width: 260px;
+  box-sizing: border-box;
+}
+.sidebar-profile .profile-avatar {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 12px;
+}
+.sidebar-profile .profile-avatar img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.profile-name h2 {
+  margin: 8px 0 4px;
+  font-size: 1.25rem;
+}
+.profile-name h3 {
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.profile-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.btn {
+  padding: 8px 12px;
+  border-radius: 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.profile-divider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  margin: 12px 0;
+}
+.profile-section-title {
+  color: var(--accent);
+  margin: 8px 0;
+  font-size: 1.05rem;
+}
+.profile-details {
+  text-align: left;
+  padding-left: 8px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.profile-details .icon {
+  margin-right: 8px;
+  vertical-align: middle;
+  color: var(--accent);
+}
+.committees-list {
+  text-align: left;
+  padding-left: 18px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+/* Main content (center) */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Performance and contribution cards reuse .project-card but tighten inner spacing */
+.performance-card .performance-header,
+.contribution-card .contribution-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.performance-card .hr,
+.contribution-card .hr {
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin-left: 12px;
+}
+.performance-body {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.donut { display:flex; align-items:center; justify-content:center; }
+.performance-text .muted { color: var(--muted); font-weight:600; }
+
+/* Contribution */
+.contribution-body {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* Right experience card */
+.experience-card {
+  padding: 22px;
+}
+.experience-title { margin: 6px 0 18px; font-size: 1.05rem; }
+.experience-section { margin-bottom: 12px; }
+.experience-number {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 6px 0 12px;
+  color: var(--text);
+}
+
+/* Projects table */
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+.projects-table th,
+.projects-table td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: var(--muted);
+}
+.projects-table thead th { color: var(--text); font-weight:600; }
+
+/* small calendar preview */
+.small-calendar {
+  margin-top: 14px;
+  width: 100%;
+}
+.small-calendar .react-calendar {
+  width: 100%;
+  border: none;
+  background: transparent;
+}
+.small-calendar .selected-date {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: left;
+}
+
+/* responsive adjustments */
+@media (max-width: 1200px) {
+  .admin-add-layout{
+    width: calc(100% - var(--sidebar-width) - 32px);
+  }
+  .project-card{
+    min-height: 460px;
+  }
+}
+
 @media (max-width: 1000px){
   :root {
     --sidebar-width: 0;
@@ -134,20 +342,64 @@ body{
     align-items: stretch;
     min-height: auto;
     margin-left: 0;
+    width: 100%;
   }
   .project-card{
     max-width: 100%;
     min-height: 360px;
+    padding: 24px;
+    padding-bottom: 32px;
   }
   .calendar-container{
     flex: 0 0 auto;
     width: 100%;
     margin-top: 20px;
   }
-  .project-card{
-    padding: 24px;
-    padding-bottom: 32px;
-    min-height: auto;
-  }
   .project-card .form-container { gap: 12px; }
+
+  /* Responsive tweaks */
+  .dashboard-flex { flex-direction: column; gap: 18px; padding: 16px; }
+  .sidebar-profile { max-width: 100%; width: 100%; }
+  .experience-card { width: 100%; }
 }
+
+@media (max-width: 1100px) {
+  .admin-dashboard-page .dashboard-frame {
+    padding: 16px;
+    max-width: 980px;
+  }
+  .dashboard-flex {
+    gap: 18px;
+  }
+  .main-content { min-width: 360px; }
+  .experience-card, .calendar-container { flex: 0 0 300px; max-width: 300px; }
+}
+
+@media (max-width: 820px) {
+  .admin-dashboard-page .dashboard-frame {
+    max-width: 100%;
+    min-height: auto;
+    padding: 12px;
+  }
+  .dashboard-flex {
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+  }
+  .sidebar-profile,
+  .experience-card,
+  .calendar-container,
+  .main-content {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+  .project-card { max-height: none; }
+}
+
+/* helper: if you render Header/LeftNavigationBar outside the frame, wrap the inside with .dashboard-frame in JSX:
+   <div className="admin-dashboard-page">
+     <div className="dashboard-frame">
+       <div className="dashboard-flex"> ... </div>
+     </div>
+   </div>
+*/
