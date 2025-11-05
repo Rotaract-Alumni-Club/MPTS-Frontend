@@ -3,10 +3,11 @@ import LeftNavigationBar from '../../Components/LeftNavigationBar/LeftNavigation
 import Header from '../../Components/Header/Header'
 import TaskBar from '../../Components/SerachAnd/SearchAndButton'
 import MemberViewAccountComponent from '../../Components/AdminComponents/MemberViewAccountComponent'
+import "../../SCSS/AdminStyles/AdminViewAccount/AdminViewAccount.scss"
 
 const AdminViewAccount = () => {
   return (
-    <div>
+    <div className="admin-view-account">
       <LeftNavigationBar />
       <Header />
       <TaskBar
@@ -14,8 +15,9 @@ const AdminViewAccount = () => {
         title2="View Members"
       />
       <h1>Admin View Account Page</h1>
-      <MemberViewAccountComponent />
-
+      <div className="table-wrapper">
+        <MemberViewAccountComponent />
+      </div>
     </div>
   )
 }
