@@ -19,6 +19,8 @@ const AddTask = () => {
     },
   ]);
 
+  const [errors, setErrors] = useState([]);
+
   // ✅ Fetch committees when component mounts
   useEffect(() => {
     fetchCommittees();
@@ -55,11 +57,15 @@ const AddTask = () => {
     }
   };
 
-  const handleTaskChange = (index, field, value) => {
+const handleTaskChange = (index, field, value) => {
     const newTasks = [...tasks];
     newTasks[index][field] = value;
     setTasks(newTasks);
-  };
+
+    if (field === "StartDate" || field === "EndDate") {
+        validateRowDates(index, newTasks[index]);
+    }
+};
 
   const handleAddRow = () => {
     setTasks([
@@ -73,6 +79,7 @@ const AddTask = () => {
         EndDate: "",
       },
     ]);
+    setErrors((prev) => [...prev, ""]);
   };
 
 const handleMemberSelect = (index, memberName) => {
@@ -94,6 +101,38 @@ const handleRemoveMember = (index, memberName) => {
   setTasks(updatedTasks);
 };
 
+const validateRowDates = (index, task) => {
+  const start = task.StartDate ? new Date(task.StartDate) : null;
+  const end = task.EndDate ? new Date(task.EndDate) : null;
+  const newErrors = [...errors];
+
+  if (start && end) {
+    if (end.getTime() <= start.getTime()) {
+     newErrors[index] = "End date must be after Start date.";
+    } else {
+      newErrors[index] = "";
+    }
+  } else {
+    // clear error if one of dates missing (allow other validations if needed)
+    newErrors[index] = "";
+  }
+  setErrors(newErrors);
+};
+
+const validateTasks = () => {
+  const newErrors = tasks.map((t, i) => {
+    const start = t.StartDate ? new Date(t.StartDate) : null;
+    const end = t.EndDate ? new Date(t.EndDate) : null;
+    if (start && end) {
+      if (end.getTime() <= start.getTime()) {
+        return "End date must be after Start date.";
+      }
+    }
+    return "";
+  });
+  setErrors(newErrors);
+  return newErrors.every((e) => e === "");
+};
 
 
   const handleSubmit = async (e) => {
@@ -101,6 +140,10 @@ const handleRemoveMember = (index, memberName) => {
 
     if (!selectedCommittee) {
       toast.error("Please select a committee first!");
+      return;
+    }
+     if (!validateTasks()) {
+     toast.error("Please fix date errors before submitting.");
       return;
     }
 
@@ -136,6 +179,7 @@ EndDate: task.EndDate ? new Date(task.EndDate) : new Date(),
           EndDate: "",
         },
       ]);
+       setErrors([]);
       setSelectedCommittee("");
     } catch (err) {
       console.error("Error saving tasks:", err);
@@ -147,7 +191,7 @@ EndDate: task.EndDate ? new Date(task.EndDate) : new Date(),
     <div className="add-task">
       <ToastContainer position="top-center" autoClose={3000} />
       <div className="table-wrapper">
-        {/* ✅ Committee Dropdown at Top */}
+       
         <div className="committee-selection">
           <label>Select Committee *</label>
           <select
@@ -257,6 +301,11 @@ EndDate: task.EndDate ? new Date(task.EndDate) : new Date(),
                         handleTaskChange(index, "EndDate", e.target.value)
                       }
                     />
+                       {errors[index] ? (
+                     <div style={{ color: " #c0392b", fontSize: 12, marginTop: 6 }}>
+                       {errors[index]}
+                     </div>
+                   ) : null}
                   </td>
 
                   <td>
@@ -278,6 +327,6 @@ EndDate: task.EndDate ? new Date(task.EndDate) : new Date(),
       </div>
     </div>
   );
-};
+}
 
 export default AddTask;

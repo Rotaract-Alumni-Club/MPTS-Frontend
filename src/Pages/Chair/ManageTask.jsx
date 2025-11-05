@@ -9,9 +9,9 @@ import ViewTasks from '../../Components/chair Component/ViewTask'
 const ManageTask = () => {
    const [activeView, setActiveView] = useState('add');
 
-     const handleViewChange = (view) => {
-    setActiveView('view');
-  };
+   const handleViewChange = (view) => {
+    setActiveView(view);
+ };
 
   return (
     <>
