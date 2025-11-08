@@ -3,9 +3,27 @@ import SearchAndButton from "../../Components/SerachAnd/SearchAndButton";
 import "../../SCSS/AdminStyles/AdminCommitees/Manage Committees.scss"
 import Header from "../../Components/Header/Header";
 import LeftNavigationBar from "../../Components/LeftNavigationBar/LeftNavigationBar";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ProjectAddForm from "../../Components/AdminComponents/ProjectAddForm";
+import ProjectsTable from "../../Components/AdminComponents/ProjectsTable";
+import AddCommitteeForm from "../../Components/chair Component/AddCommitteeForm";
+import ViewCommittees from "../../Components/chair Component/ViewCommitees";
 
 
 const ManageCommittees = () => {
+    const navigate = useNavigate()
+
+    const [activeView, setActiveView] = useState('add');
+      
+        const handleViewChange = (view) => {
+          setActiveView(view);
+        };
+      
+          const handleCommitteeAdded = () => {
+          setActiveView('view');
+        };
+    
     return (
         <div>
             <Header/>
@@ -15,10 +33,13 @@ const ManageCommittees = () => {
             <div className="searchandbutton"><SearchAndButton
             title1="Search Committees"
             title2="Add New Committee"
+            onAddClick={() => handleViewChange('add')}
+            onViewClick={() => handleViewChange('view')}
+            activeView={activeView}
             />
             </div>
             <br />
-            <div className="commitee">
+            {/* <div className="commitee">
                 <h3>Committee 1</h3>
                 <p>Details about Committee 1</p>
                 <table>
@@ -72,7 +93,10 @@ const ManageCommittees = () => {
             <div className="arrowbutton">
                 <button> <FaArrowAltCircleLeft/></button> &nbsp; &nbsp; &nbsp; &nbsp;
                 <button> <FaArrowAltCircleRight/></button>
-            </div>
+            </div> */}
+
+            {activeView === 'add' && <AddCommitteeForm onCommitteeAdded={handleCommitteeAdded} />}
+            {activeView === 'view' && <ViewCommittees />}
 
        </div>
     );

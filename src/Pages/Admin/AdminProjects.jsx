@@ -5,15 +5,33 @@ import SearchAndButton from '../../Components/SerachAnd/SearchAndButton.jsx'
 import ProjectsTable from '../../Components/AdminComponents/ProjectsTable.jsx'
 import LeftNavigationBar from '../../Components/LeftNavigationBar/LeftNavigationBar.jsx'
 import LeftNavChair from '../../Components/chair Component/LeftNavChair.jsx'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import ProjectAddForm from '../../Components/AdminComponents/ProjectAddForm.jsx'
+
 
 const AdminProjects = () => {
+  const navigate = useNavigate()
+
+    const [activeView, setActiveView] = useState('add');
+  
+    const handleViewChange = (view) => {
+      setActiveView(view);
+    };
+  
+      const handleCommitteeAdded = () => {
+      setActiveView('view');
+    };
   return (
     <div>
       {/* <LeftNavigationBar/> */}
       <LeftNavigationBar />
       <SearchAndButton
-      title1="Search Projects"
-      title2="Add New Project"
+      title1="Add New Project"
+      title2="View Projects"
+      onAddClick={() => handleViewChange('add')}
+      onViewClick={() => handleViewChange('view')}
+      activeView={activeView} 
       />
       
       
@@ -31,10 +49,11 @@ const AdminProjects = () => {
 
       <h2>Recently Accessed</h2>
 
-      < ProjectsTable />
+      {/* < ProjectsTable /> */}
       
 
-      
+       {activeView === 'add' && <ProjectAddForm onCommitteeAdded={handleCommitteeAdded} />}
+      {activeView === 'view' && <ProjectsTable />}
       
     </div>
   )
