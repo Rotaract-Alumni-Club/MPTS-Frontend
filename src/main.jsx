@@ -61,6 +61,9 @@ const router= createBrowserRouter([
     errorElement:<div>Page Not Found</div>
   },
   {
+    path:"/AdminDashboard",
+    element:<AdminDashboard/>,
+    errorElement:<div>Page Not Found</div>
   }
   
 ])

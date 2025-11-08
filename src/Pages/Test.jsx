@@ -10,7 +10,7 @@ function Test() {
         <Header/>
         <AddView/>
         <LeftNavigationBar/>
-        <BasicInfo/>
+        {/* <BasicInfo/> */}
           
     </div>
   )
