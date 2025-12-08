@@ -7,10 +7,24 @@ import { useState } from 'react';
 import "../../SCSS/AdminStyles/AdminDashboard/AdminDashboard.scss"
 import ProjectAddForm from '../../Components/AdminComponents/ProjectAddForm';
 import TaskBar from '../../Components/SerachAnd/SearchAndButton';
+import { useNavigate } from 'react-router-dom';
+import ProjectsTable from '../../Components/AdminComponents/ProjectsTable';
 
 
 const AdminAddProject = () => {
     const [date, setDate] = useState(new Date());
+
+    const navigate = useNavigate()
+
+    const [activeView, setActiveView] = useState('add');
+  
+    const handleViewChange = (view) => {
+      setActiveView(view);
+    };
+  
+      const handleCommitteeAdded = () => {
+      setActiveView('view');
+    };
     
   return (
     <div>
@@ -20,7 +34,9 @@ const AdminAddProject = () => {
       <TaskBar
         title1="Add New Project"
         title2="View Projects"
-      
+        onAddClick={() => handleViewChange('add')}
+        onViewClick={() => handleViewChange('view')}
+        activeView={activeView}     
       />
 
       {/* layout wrapper: form on left, calendar on right */}
@@ -38,6 +54,8 @@ const AdminAddProject = () => {
           <p className="selected-date">Selected date: {date.toDateString()}</p>
         </div>
       </div>
+      {activeView === 'add' && <ProjectAddForm onCommitteeAdded={handleCommitteeAdded} />}
+      {activeView === 'view' && <ProjectsTable />}
 
     </div>
   )

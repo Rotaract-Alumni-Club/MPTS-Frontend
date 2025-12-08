@@ -17,21 +17,21 @@ function LeftNavigationBar() {
             </div>
             <div className="row">
                 <FaProjectDiagram/>
-                <NavLink to="/my-projects" className={linkClass}>My Projects</NavLink>
+                <NavLink to="/AdminProjects" className={linkClass}>My Projects</NavLink>
             </div>
             <div className="row">
                 <FaUser/>
-                <NavLink to="/profile" className={linkClass}>Profile</NavLink>
+                <NavLink to="/AdminDashboard" className={linkClass}>Profile</NavLink>
             </div>
             <div className="row">
-                <NavLink to="/rotaract" className={linkClass}>Rotaract</NavLink>
+                <NavLink to="https://rotaractalumnimora.org/" className={linkClass}>Rotaract</NavLink>
             </div>
             <div className="row">
                 <NavLink to="/manage" className={linkClass}>Manage</NavLink>
                 <div className="row1">
-                    <NavLink to="/AdminAddProjects" className={linkClass}>Projects</NavLink>
-                    <NavLink to="/manageCommittees" className={linkClass}>Committees</NavLink>
-                    <NavLink to="/manageTasks" className={linkClass}>Tasks</NavLink>
+                    <NavLink to="/AdminProjects" className={linkClass}>Projects</NavLink>
+                    <NavLink to="/AdminCommittees" className={linkClass}>Committees</NavLink>
+                    <NavLink to="/AdminAddMember" className={linkClass}>Member</NavLink>
                 </div>
             </div>
 

@@ -4,11 +4,11 @@ import "../../SCSS/AdminStyles/AdminViewAccount/AdminViewAccount.scss"
 
 const MemberAddFormComponent = () => {
     // sample members — replace with real data or props/store
-    const sampleMembers = useMemo(() => [
-      { id: 1, avatar: "https://i.pravatar.cc/80?img=12", name: "Aisha Khan", email: "aisha.khan@example.com", role: "Administrator", status: "active", registeredAt: "2025-02-10T09:22:00Z" },
-      { id: 2, avatar: "https://i.pravatar.cc/80?img=5", name: "Daniel Smith", email: "daniel.smith@example.com", role: "Member", status: "inactive", registeredAt: "2024-11-03T11:12:00Z" },
-      { id: 3, avatar: "", name: "Fatima Ali", email: "fatima.ali@example.com", role: "Moderator", status: "active", registeredAt: "2025-05-16T14:40:00Z" },
-    ], [])
+    // const sampleMembers = useMemo(() => [
+    //   { id: 1, avatar: "https://i.pravatar.cc/80?img=12", name: "Aisha Khan", email: "aisha.khan@example.com", role: "Administrator", status: "active", registeredAt: "2025-02-10T09:22:00Z" },
+    //   { id: 2, avatar: "https://i.pravatar.cc/80?img=5", name: "Daniel Smith", email: "daniel.smith@example.com", role: "Member", status: "inactive", registeredAt: "2024-11-03T11:12:00Z" },
+    //   { id: 3, avatar: "", name: "Fatima Ali", email: "fatima.ali@example.com", role: "Moderator", status: "active", registeredAt: "2025-05-16T14:40:00Z" },
+    // ], [])
 
     const formatDate = (iso) => {
       try { return new Date(iso).toLocaleDateString() } catch { return iso }
@@ -50,7 +50,7 @@ const MemberAddFormComponent = () => {
 
             <button type="submit">Create Account</button>
 
-            {/* Modern members table (uses AdminViewAccount.scss) */}
+            {/* /Modern members table (uses AdminViewAccount.scss)
             <div style={{ marginTop: 24 }} className="table-wrapper">
               <table className="member-table" role="table" aria-label="Members table">
                 <thead>
@@ -93,7 +93,7 @@ const MemberAddFormComponent = () => {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </div> */}
         </div>
     )
 }
