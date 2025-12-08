@@ -8,128 +8,129 @@
   padding: 20px 16px;
   border-radius: 0;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-     cursor: default;          
+  cursor: default;          
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   z-index: 100;
 
+  .logo {
+    width: 150px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 40px;
+    cursor: default;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
 
-  .logo{
-  width:150px;
-  height:100px;
-  object-fit:contain;
-  margin-bottom:40px;
-   cursor: default;
-  -webkit-user-drag: none;
-  user-select: none;
-}
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
 
-&.purple{
-  background-color: #8b4dff;
-}
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
 
-    .row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      position: relative;
+    /* active state for regular rows */
+    &.active {
+      background: linear-gradient(90deg, #8b4dff 0%, #a05fff 100%);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(139, 77, 255, 0.3);
+    }
 
-      &:hover {
-        background: rgba(255, 255, 255, 0.3);
-      }
+    &.active svg,
+    &.active a {
+      color: white;
+    }
 
-     /* active state for this row */
-     &.active {
-       background: linear-gradient(180deg, #f6ecff 0%, #3a235c 100%);
-       color: #fff;
-     }
+    svg {
+      font-size: 18px;
+      color: #4a4a4a;
+    }
 
-     /* make icon and link inherit the active color */
-     &.active svg,
-     &.active a {
-       color: inherit;
-     }
+    a {
+      text-decoration: none;
+      color: #2d2d2d;
+      font-size: 15px;
+      font-weight: 500;
+      flex: 1;
+    }
 
-      svg {
-        font-size: 18px;
-        color: #4a4a4a;
-      }
+    /* manage row specific */
+    &.manage-row {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px 0;
+      background: none;
 
-      a {
-        text-decoration: none;
-        color: #2d2d2d;
+      .manage-label {
+        padding: 12px 16px;
         font-size: 15px;
         font-weight: 500;
-        flex: 1;
+        color: #2d2d2d;
+        width: 100%;
       }
 
+      &.active .manage-label {
+        color: #8b4dff;
+        font-weight: 600;
+      }
+    }
 
-
-
-    // Nested submenu styling
+    /* submenu styling */
     .row1 {
       display: flex;
       flex-direction: column;
-      margin-left: 24px;
-      margin-top: 8px;
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0;
       border-left: 2px solid #b8a3c9;
       padding-left: 16px;
 
       a {
-        padding: 8px 12px;
-        margin-bottom: 4px;
+        padding: 10px 12px;
+        margin-bottom: 6px;
         border-radius: 6px;
         transition: all 0.3s ease;
         position: relative;
-
-        &:nth-child(2) {
-          background: linear-gradient(90deg, #8b4dff 0%, #a05fff 100%);
-          color: white;
-          font-weight: 600;
-          box-shadow: 0 2px 8px rgba(139, 77, 255, 0.3);
-
-          &::before {
-            content: '';
-            position: absolute;
-            left: -18px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            background: #8b4dff;
-            border-radius: 50%;
-          }
-        }
+        background: transparent;
+        color: #2d2d2d;
+        font-size: 13px;
 
         &:hover {
           background: rgba(139, 77, 255, 0.1);
           padding-left: 16px;
         }
-      }
-    }
 
-    // Add connector lines for Manage dropdown
-    &:has(.row1) {
-      flex-direction: column;
-      align-items: flex-start;
+        /* active submenu link */
+        &.active {
+          background: linear-gradient(90deg, #8b4dff 0%, #a05fff 100%);
+          color: white;
+          font-weight: 600;
+          box-shadow: 0 2px 8px rgba(139, 77, 255, 0.3);
+          padding-left: 12px;
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 16px;
-        top: 40px;
-        width: 2px;
-        height: calc(100% - 40px);
-        background: #b8a3c9;
+          &::before {
+            content: '→';
+            position: absolute;
+            left: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b4dff;
+            font-weight: bold;
+          }
+        }
       }
     }
   }
-
-  
 }
