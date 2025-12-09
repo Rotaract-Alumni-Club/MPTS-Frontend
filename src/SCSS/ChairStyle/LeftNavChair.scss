@@ -36,6 +36,25 @@
     position: relative;
     cursor: pointer;
 
+    /* add/replace inside .LeftNavigationBar .row (or at the end of file) */
+
+.row > a.active {
+  background: linear-gradient(90deg, #8b4dff 0%, #a05fff 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(139, 77, 255, 0.3);
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+/* ensure the icon/text inside active row still look correct */
+.row.active a,
+.row > a.active {
+  color: #fff;
+}
+
+/* keep submenu .row1 .active as before (no change needed) */
+
     &:hover {
       background: rgba(255, 255, 255, 0.3);
     }
