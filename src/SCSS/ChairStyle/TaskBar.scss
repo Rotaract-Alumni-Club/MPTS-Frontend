@@ -40,16 +40,13 @@
   color: #0f172a;
   border-left: 1px solid rgba(15, 23, 42, 0.04);
 }
-.purple{
-     //background: linear-gradient(180deg, #3a235c  0%, #3a235c 100%);
-}
+
 
 /* change .white to set text color (not background) */
 .white{
   color: #000000;
 }
 
-/* active segment styles (applies when your JSX adds 'active') */
 .TaskBar .add.active,
 .TaskBar .view.active {
   background: linear-gradient(180deg, #f6ecff 0%, #efe1ff 100%);
@@ -57,6 +54,7 @@
 }
 .TaskBar .add.active h3,
 .TaskBar .view.active h3 {
+  color: #000000;
   color: #000000;
 }
 
