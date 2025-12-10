@@ -62,7 +62,7 @@ function LeftNavigationBar() {
 
         <div className={`row ${active === 'projects' ? 'active' : ''}`} onClick={() => handleNav('projects')}>
           <FaProjectDiagram/>
-          <Link to="/MyProjects" className={active === 'projects' ? 'active' : ''} onClick={() => handleNav('projects')}>My Projects</Link>
+          <Link to="/MyProject" className={active === 'projects' ? 'active' : ''} onClick={() => handleNav('projects')}>My Projects</Link>
         </div>
 
         <div className={`row ${active === 'profile' ? 'active' : ''}`} onClick={() => handleNav('profile')}>

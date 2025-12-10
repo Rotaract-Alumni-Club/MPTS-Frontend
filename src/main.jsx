@@ -15,6 +15,7 @@ import ManageCommittees from './Pages/Admin/AdminCommitees.jsx';
 import AdminViewAccount from './Pages/Admin/AdminViewAccount.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
 import ChairDashboard from './Pages/Chair/ChairDashboard.jsx';
+import MyProject from './Pages/Chair/MyProject.jsx';
 
 
 
@@ -29,6 +30,12 @@ const router= createBrowserRouter([
   {
     path:"/ChairDashboard",
     element:<ChairDashboard/>,
+    errorElement:<div>Page Not Found</div>
+  },
+
+   {
+    path: "/MyProject",
+    element: <MyProject/>,
     errorElement:<div>Page Not Found</div>
   },
 
