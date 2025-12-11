@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../SCSS/AdminStyles/AdminCommitees/AdminCommittees.scss"
+import "../../SCSS/AdminStyles/AdminCommitees/Manage Committees.scss"
 
 const MemberTableComponent = () => {
   return (

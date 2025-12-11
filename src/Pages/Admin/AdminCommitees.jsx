@@ -31,8 +31,8 @@ const ManageCommittees = () => {
             {/* <h2>Manage Committees Page</h2> */}
 
             <div className="searchandbutton"><SearchAndButton
-            title1="Search Committees"
-            title2="Add New Committee"
+            title1="Add New Committees"
+            title2="Search Committee"
             onAddClick={() => handleViewChange('add')}
             onViewClick={() => handleViewChange('view')}
             activeView={activeView}

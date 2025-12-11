@@ -34,17 +34,18 @@ const AdminAddMember = () => {
     <div>
       <Header/>
       <LeftNavigationBar/>
-      <TaskBar
-        title1="Add New Member"
-        title2="View Members"
-        onAddClick={() => handleViewChange('add')}
-        onViewClick={() => handleViewChange('view')}
-        activeView={activeView}
-      />
-      {/* <h1>Admin Add Member Page</h1>
-      <MemberAddFormComponent/> */}
-       {activeView === 'add' && <MemberAddFormComponent onCommitteeAdded={handleCommitteeAdded} />}
-      {activeView === 'view' && <MemberViewAccountComponent />}
+      
+        <TaskBar
+          title1="Add New Member"
+          title2="View Members"
+          onAddClick={() => handleViewChange('add')}
+          onViewClick={() => handleViewChange('view')}
+          activeView={activeView}
+        />
+      <div style={{ marginLeft: '250px' }}>  
+        {activeView === 'add' && <MemberAddFormComponent onCommitteeAdded={handleCommitteeAdded} />}
+        {activeView === 'view' && <MemberViewAccountComponent />}
+      </div>
     </div>
   )
 }

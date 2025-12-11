@@ -1,48 +1,67 @@
 // ...existing code...
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaHome, FaUser, FaProjectDiagram, FaHandsHelping } from 'react-icons/fa';
-import { FaCodeCommit, FaPersonRifle } from 'react-icons/fa6';
-import '../../SCSS/ChairStyle/LeftNavChair.scss'
+import { FaHome, FaUser, FaProjectDiagram } from 'react-icons/fa'
+import { FaCodeCommit } from 'react-icons/fa6'
+import '../../SCSS/componentStyle/LeftNavigationBar.scss'
 
 function LeftNavigationBar() {
-  const linkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')
-
   return (
-    <div>
-        <div className="LeftNavigationBar">
-            <div className="row">
-                <FaHome/>
-                <NavLink to="/" className={linkClass}>Home</NavLink>
-            </div>
-            <div className="row">
-                <FaProjectDiagram/>
-                <NavLink to="/AdminProjects" className={linkClass}>My Projects</NavLink>
-            </div>
-            <div className="row">
-                <FaUser/>
-                <NavLink to="/AdminDashboard" className={linkClass}>Profile</NavLink>
-            </div>
-            <div className="row">
-                <NavLink to="https://rotaractalumnimora.org/" className={linkClass}>Rotaract</NavLink>
-            </div>
-            <div className="row">
-                <NavLink to="/manage" className={linkClass}>Manage</NavLink>
-                <div className="row1">
-                    <NavLink to="/AdminProjects" className={linkClass}>Projects</NavLink>
-                    <NavLink to="/AdminCommittees" className={linkClass}>Committees</NavLink>
-                    <NavLink to="/AdminAddMember" className={linkClass}>Member</NavLink>
-                </div>
-            </div>
+    <div className="LeftNavigationBar">
+      <div className="brand">
+        <img
+          src="https://rcunialumni.home.blog/wp-content/uploads/2023/05/racualu-full-black-logo.png?w=1080"
+          alt="Rotaract logo"
+          className="logo"
+        />
+      </div>
 
-            <div className="row">
-                <FaCodeCommit/>
-                <NavLink to="/reports" className={linkClass}>Reports</NavLink>
-            </div>
-            <div className="row">
-                <NavLink to="/settings" className={linkClass}>Settings</NavLink>
-            </div>
-        </div>
+      <NavLink to="/" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+        <FaHome />
+        <span>Home</span>
+      </NavLink>
+
+      <NavLink to="/AdminProjects" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+        <FaProjectDiagram />
+        <span>My Projects</span>
+      </NavLink>
+
+      <NavLink to="/AdminDashboard" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+        <FaUser />
+        <span>Profile</span>
+      </NavLink>
+
+      <a
+        href="https://rotaractalumnimora.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="row"
+      >
+        <span>Rotaract</span>
+      </a>
+
+      <div className="row-divider">Manage</div>
+
+      <NavLink to="/AdminProjects" className={({ isActive }) => (isActive ? 'row submenu active' : 'row submenu')}>
+        <span>Projects</span>
+      </NavLink>
+
+      <NavLink to="/AdminCommittees" className={({ isActive }) => (isActive ? 'row submenu active' : 'row submenu')}>
+        <span>Committees</span>
+      </NavLink>
+
+      <NavLink to="/AdminAddMember" className={({ isActive }) => (isActive ? 'row submenu active' : 'row submenu')}>
+        <span>Member</span>
+      </NavLink>
+
+      <NavLink to="/reports" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+        <FaCodeCommit />
+        <span>Reports</span>
+      </NavLink>
+
+      <NavLink to="/settings" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+        <span>Settings</span>
+      </NavLink>
     </div>
   )
 }

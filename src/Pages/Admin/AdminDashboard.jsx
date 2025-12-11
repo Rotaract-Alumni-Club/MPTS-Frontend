@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../../SCSS/AdminStyles/AdminDashboard/AdminDashboard.scss";
 import Header from "../../Components/Header/Header";
 import LeftNavigationBar from "../../Components/LeftNavigationBar/LeftNavigationBar";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaPlus } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaCheckCircle, FaPlus, FaCode, FaUsers } from "react-icons/fa";
 
 const AdminDashboard = () => {
-  const [date, setDate] = useState(new Date());
-
   const projects = [
     ["Wanakkam", "2025"],
     ["Sabandi", "2024"],
@@ -23,111 +20,195 @@ const AdminDashboard = () => {
       <Header />
       <LeftNavigationBar />
 
-      <div className="dashboard-flex">
-        {/* left profile sidebar */}
-        <aside className="project-card sidebar-profile">
-          <div className="profile-avatar">
-            <img src="https://placekitten.com/240/240" alt="profile" />
+      <div className="dashboard-wrapper">
+        {/* Dashboard Header */}
+        <div className="dashboard-header">
+          <h1>Welcome Back, Jenny! 👋</h1>
+          <p>Here's what's happening with your projects today</p>
+        </div>
+
+        {/* Top Stats */}
+        <div className="dashboard-grid">
+          <div className="stat-card">
+            <div className="stat-label">Total Projects</div>
+            <div className="stat-value">12</div>
+            <div className="stat-change positive">↑ 2 this month</div>
           </div>
 
-          <div className="profile-name">
-            <h2>Jenny</h2>
-            <h3>Sherman</h3>
+          <div className="stat-card">
+            <div className="stat-label">Active Committees</div>
+            <div className="stat-value">5</div>
+            <div className="stat-change positive">↑ All active</div>
           </div>
 
-          <div className="profile-actions">
-            <button className="btn">EditProfile</button>
-            <button className="btn btn-primary">View more</button>
+          <div className="stat-card">
+            <div className="stat-label">Performance</div>
+            <div className="stat-value">87%</div>
+            <div className="stat-change positive">↑ 5% improvement</div>
           </div>
+        </div>
 
-          <hr className="profile-divider" />
+        {/* Main Content */}
+        <div className="content-grid">
+          {/* Left: Profile & Performance */}
+          <div>
+            {/* Profile Card */}
+            <div className="card" style={{ marginBottom: "24px" }}>
+              <div className="profile-section">
+                <img
+                  src="https://placekitten.com/240/240"
+                  alt="Jenny Sherman"
+                  className="avatar-large"
+                />
+                <div className="profile-name">
+                  <h3>Jenny Sherman</h3>
+                </div>
+                <p className="profile-title">Project Administrator</p>
 
-          <h4 className="profile-section-title">Personal Details</h4>
-          <div className="profile-details">
-            <div><FaPhoneAlt className="icon" /> <span>+94 77 2315 897</span></div>
-            <div><FaEnvelope className="icon" /> <span>Jenny33@gmail.com</span></div>
-            <div><FaMapMarkerAlt className="icon" /> <span>University of Moratuwa</span></div>
-          </div>
+                <div className="btn-group">
+                  <button className="btn btn-secondary">Edit Profile</button>
+                  <button className="btn btn-primary">View More</button>
+                </div>
 
-          <h4 className="profile-section-title">Committees</h4>
-          <ul className="committees-list">
-            <li>Flyer Design</li>
-            <li>Content Creator</li>
-          </ul>
-        </aside>
-
-        {/* center area */}
-        <main className="main-content">
-          <section className="project-card performance-card">
-            <div className="performance-header">
-              <h3>2025 Performance review</h3>
-              <div className="hr" />
+                <div className="profile-info">
+                  <div className="info-item">
+                    <FaPhoneAlt />
+                    <span>+94 77 2315 897</span>
+                  </div>
+                  <div className="info-item">
+                    <FaEnvelope />
+                    <span>jenny33@gmail.com</span>
+                  </div>
+                  <div className="info-item">
+                    <FaMapMarkerAlt />
+                    <span>University of Moratuwa</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="performance-body">
-              <div className="donut">
-                <svg viewBox="0 0 36 36" width="160" height="160" className="donut-svg">
-                  <path d="M18 2a16 16 0 1 0 16 16A16 16 0 0 0 18 2Z" fill="#ece7fb" />
-                  <path d="M18 2a16 16 0 0 1 11 4.2" fill="#d9534f" />
-                  <circle cx="18" cy="18" r="9" fill="#f9f9fb" />
-                  <text x="18" y="20.3" textAnchor="middle" fontSize="6" fill="#1f1f1f" fontWeight="700">76%</text>
-                </svg>
+            {/* Committees Card */}
+            <div className="card">
+              <div className="card-header">
+                <h2>Committees</h2>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                <div className="info-item" style={{ padding: "12px", background: "var(--card-hover)", borderRadius: "8px" }}>
+                  <FaCheckCircle style={{ color: "var(--success)" }} />
+                  <span>Flyer Design</span>
+                </div>
+                <div className="info-item" style={{ padding: "12px", background: "var(--card-hover)", borderRadius: "8px" }}>
+                  <FaCheckCircle style={{ color: "var(--success)" }} />
+                  <span>Content Creator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Performance & Experience */}
+          <div>
+            {/* Performance Card */}
+            <div className="card" style={{ marginBottom: "24px" }}>
+              <div className="card-header">
+                <h2>Performance Review 2025</h2>
               </div>
 
-              <div className="performance-text">
-                <p className="muted">Performance Rating</p>
+              <div className="performance-body">
+                <div className="chart-container">
+                  <svg viewBox="0 0 36 36" width="160" height="160" className="donut-svg">
+                    <circle cx="18" cy="18" r="16" fill="none" stroke="#e2e8f0" strokeWidth="3" />
+                    <circle
+                      cx="18"
+                      cy="18"
+                      r="16"
+                      fill="none"
+                      stroke="#6c5ce7"
+                      strokeWidth="3"
+                      strokeDasharray="88.96"
+                      strokeDashoffset="4"
+                      strokeLinecap="round"
+                      style={{ transform: "rotate(-90deg)", transformOrigin: "50% 50%" }}
+                    />
+                    <text
+                      x="18"
+                      y="21"
+                      textAnchor="middle"
+                      fontSize="8"
+                      fill="#1a202c"
+                      fontWeight="700"
+                    >
+                      87%
+                    </text>
+                  </svg>
+                </div>
+                <div className="chart-info">
+                  <h4>Overall Rating</h4>
+                  <div className="chart-info-value">Excellent</div>
+                  <div className="chart-info-detail">Keep up the great work on your projects!</div>
+                </div>
               </div>
             </div>
-          </section>
 
-          <section className="project-card contribution-card">
-            <div className="contribution-header">
-              <h3>Contribution</h3>
-              <div className="hr" />
+            {/* Contribution Card */}
+            <div className="card">
+              <div className="card-header">
+                <h2>Quick Actions</h2>
+              </div>
+
+              <div className="contribution-grid">
+                <div className="contribution-box">
+                  <div className="contribution-icon" style={{ background: "rgba(108, 92, 231, 0.1)", color: "#6c5ce7" }}>
+                    <FaPlus />
+                  </div>
+                  <div className="contribution-label">Add Project</div>
+                </div>
+                <div className="contribution-box">
+                  <div className="contribution-icon" style={{ background: "rgba(240, 106, 180, 0.1)", color: "#f06ab4" }}>
+                    <FaUsers />
+                  </div>
+                  <div className="contribution-label">Manage Team</div>
+                </div>
+                <div className="contribution-box">
+                  <div className="contribution-icon" style={{ background: "rgba(95, 179, 211, 0.1)", color: "#5fb3d3" }}>
+                    <FaCode />
+                  </div>
+                  <div className="contribution-label">View Reports</div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <div className="contribution-body">
-              <div className="contrib-item"><button><FaPlus size={36} color="#6b3fa8" /></button></div>
-              <div className="contrib-item"><button><FaPlus size={36} color="#f06ab4" /></button></div>
-              <div className="contrib-item"><button><FaPlus size={36} color="#5fb3d3" /></button></div>
-            </div>
-          </section>
-        </main>
-
-        {/* right experience card */}
-        <aside className="calendar-container experience-card">
-          <h3 className="experience-title">Experience & performance</h3>
-
-          <div className="experience-section">
-            <p className="muted">Years of experience</p>
-            <div className="experience-number">5</div>
+        {/* Projects Table */}
+        <div className="card">
+          <div className="card-header">
+            <h2>Recent Projects</h2>
+            <button className="card-header-action">View All</button>
           </div>
 
-          <div className="worked-projects">
-            <p className="muted">Worked Projects</p>
-            <table className="projects-table">
-              <thead>
-                <tr>
-                  <th>Project</th>
-                  <th>Year</th>
+          <table className="projects-table">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Year</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projects.map((project, i) => (
+                <tr key={i}>
+                  <td>{project[0]}</td>
+                  <td>{project[1]}</td>
+                  <td>
+                    <span style={{ color: "var(--success)", fontWeight: "600" }}>
+                      ✓ Completed
+                    </span>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {projects.map((r, i) => (
-                  <tr key={i}>
-                    <td>{r[0]}</td>
-                    <td>{r[1]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-{/* 
-          <div className="small-calendar">
-            <Calendar onChange={setDate} value={date} />
-            <div className="selected-date">{date.toDateString()}</div>
-          </div> */}
-        </aside>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
