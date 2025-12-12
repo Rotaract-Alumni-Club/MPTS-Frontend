@@ -54,12 +54,12 @@ function LeftNavigationBar() {
         <span>Member</span>
       </NavLink>
 
-      <NavLink to="/reports" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+      <NavLink to="/Reports" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
         <FaCodeCommit />
         <span>Reports</span>
       </NavLink>
 
-      <NavLink to="/settings" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
+      <NavLink to="/Settings" className={({ isActive }) => (isActive ? 'row active' : 'row')}>
         <span>Settings</span>
       </NavLink>
     </div>

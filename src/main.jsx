@@ -16,6 +16,8 @@ import AdminViewAccount from './Pages/Admin/AdminViewAccount.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
 import ChairDashboard from './Pages/Chair/ChairDashboard.jsx';
 import MyProject from './Pages/Chair/MyProject.jsx';
+import Settings from './Pages/Settings.jsx';
+import Reports from './Pages/Reports.jsx';
 
 
 
@@ -78,6 +80,16 @@ const router= createBrowserRouter([
   {
     path:"/AdminDashboard",
     element:<AdminDashboard/>,
+    errorElement:<div>Page Not Found</div>
+  },
+  {
+    path:"/Settings",
+    element:<Settings/>,
+    errorElement:<div>Page Not Found</div>
+  },
+  {
+    path:"/Reports",
+    element:<Reports/>,
     errorElement:<div>Page Not Found</div>
   }
   
