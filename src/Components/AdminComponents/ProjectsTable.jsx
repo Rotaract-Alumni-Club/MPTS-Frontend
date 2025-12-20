@@ -1,9 +1,9 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa'
 import "../../SCSS/AdminStyles/AdminProjectStyles/AdminProjects.scss"
 
-const ProjectsTable = () => {
-  const [projects, setProjects] = useState([
+const ProjectsTable = ({ projects: propsProjects = [] }) => {
+  const defaultProjects = [
     {
       id: 1,
       eventName: 'Event 1',
@@ -32,7 +32,15 @@ const ProjectsTable = () => {
       notes: 'Some notes about Event 4',
       chairPersons: 5
     },
-  ])
+  ]
+
+  const [projects, setProjects] = useState(propsProjects.length > 0 ? propsProjects : defaultProjects)
+
+  useEffect(() => {
+    if (propsProjects.length > 0) {
+      setProjects(propsProjects)
+    }
+  }, [propsProjects])
 
   const handleAddChairPersons = (id) => {
     console.log('Add chair persons for event:', id)

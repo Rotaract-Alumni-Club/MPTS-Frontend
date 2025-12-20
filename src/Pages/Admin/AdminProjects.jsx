@@ -12,15 +12,26 @@ import ProjectAddForm from '../../Components/AdminComponents/ProjectAddForm.jsx'
 const AdminProjects = () => {
   const navigate = useNavigate()
 
-    const [activeView, setActiveView] = useState('add');
+  const [activeView, setActiveView] = useState('add');
+  const [projects, setProjects] = useState([]);
   
-    const handleViewChange = (view) => {
-      setActiveView(view);
+  const handleViewChange = (view) => {
+    setActiveView(view);
+  };
+
+  const handleCommitteeAdded = (formData) => {
+    // Map form data to table format
+    const newProject = {
+      id: Date.now(),
+      eventName: formData.projectName,
+      date: formData.startDate,
+      notes: formData.description,
+      chairPersons: 0
     };
-  
-      const handleCommitteeAdded = () => {
-      setActiveView('view');
-    };
+    
+    setProjects([...projects, newProject]);
+    setActiveView('view');
+  };
   return (
     <div className='admin-projects-container'>
       <LeftNavigationBar />
@@ -48,7 +59,7 @@ const AdminProjects = () => {
       </div>
 
       {activeView === 'add' && <div className='form-section'><ProjectAddForm onCommitteeAdded={handleCommitteeAdded} /></div>}
-      {activeView === 'view' && <ProjectsTable />}
+      {activeView === 'view' && <ProjectsTable projects={projects} />}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../../SCSS/AdminStyles/AdminProjectStyles/ProjectAddForm.scss'
+import Toast from '../Toast/Toast.jsx'
 
 const ProjectAddForm = ({ onCommitteeAdded }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const ProjectAddForm = ({ onCommitteeAdded }) => {
     startDate: '',
     endDate: '',
   })
+  const [showToast, setShowToast] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -20,17 +22,23 @@ const ProjectAddForm = ({ onCommitteeAdded }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
-    // Add your API call here
-    if (onCommitteeAdded) {
-      onCommitteeAdded()
-    }
-    // Reset form
-    setFormData({
-      projectName: '',
-      description: '',
-      startDate: '',
-      endDate: '',
-    })
+    
+    // Show toast notification
+    setShowToast(true)
+    
+    // After 2 seconds, switch to view and call the callback
+    setTimeout(() => {
+      if (onCommitteeAdded) {
+        onCommitteeAdded(formData)
+      }
+      // Reset form
+      setFormData({
+        projectName: '',
+        description: '',
+        startDate: '',
+        endDate: '',
+      })
+    }, 2000)
   }
 
   return (
@@ -120,6 +128,7 @@ const ProjectAddForm = ({ onCommitteeAdded }) => {
           </div>
         </form>
       </div>
+      <Toast message="Project added successfully!" isVisible={showToast} duration={2000} />
     </div>
   )
 }

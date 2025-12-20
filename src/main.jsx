@@ -87,11 +87,20 @@ const router = createBrowserRouter([
     element: <MemberDashboard />,
     errorElement: <div>Page Not Found</div>
   }
-
+  ,{
+    path: "/Settings",
+    element: <Settings />,
+    errorElement: <div>Page Not Found</div>
+  },
+  {
+    path: "/Reports",
+    element: <Reports />,
+    errorElement: <div>Page Not Found</div>
+  }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    |<LoginPage />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
