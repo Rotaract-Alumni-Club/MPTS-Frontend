@@ -66,14 +66,17 @@ const AdminProjects = () => {
       <LeftNavigationBar />
       <Toast message="Project created successfully!" isVisible={showToast} duration={2000} />
       
-      <TaskBar
-        title1="Add New Project"
-        title2="View Projects"
-        onAddClick={() => handleViewChange('add')}
-        onViewClick={() => handleViewChange('view')}
-        activeView={activeView}
-      />
+      <div className='taskbar-wrapper'>
+        <TaskBar
+          title1="Add New Project"
+          title2="View Projects"
+          onAddClick={() => handleViewChange('add')}
+          onViewClick={() => handleViewChange('view')}
+          activeView={activeView}
+        />
+      </div>
 
+      <div className='content-wrapper'>
       {activeView === 'view' && (
         <>
           <div className='search_bar'>
@@ -108,6 +111,7 @@ const AdminProjects = () => {
           filterDept={filterDept}
         />
       )}
+      </div>
     </div>
   )
 }

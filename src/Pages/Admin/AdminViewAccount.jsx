@@ -64,16 +64,19 @@ const AdminViewAccount = () => {
       <Header />
       <LeftNavigationBar />
       <Toast message="Account created successfully!" isVisible={showToast} duration={2000} />
-      <TaskBar
-        title1="Add New Member"
-        title2="View Members"
-        onAddClick={() => handleViewChange('add')}
-        onViewClick={() => handleViewChange('view')}
-        activeView={activeView}
-      />
-      <br /><br />
+      <div className='taskbar-wrapper'>
+        <TaskBar
+          title1="Add New Member"
+          title2="View Members"
+          onAddClick={() => handleViewChange('add')}
+          onViewClick={() => handleViewChange('view')}
+          activeView={activeView}
+        />
+      </div>
+      <div className='content-wrapper'>
       {activeView === 'add' && <MemberAddFormComponent onMemberAdded={handleMemberAdded} />}
       {activeView === 'view' && <MemberViewAccountComponent members={members} onMemberDeleted={handleMemberDeleted} onMemberUpdated={handleMemberUpdated} />}
+      </div>
     </div>
   )
 }
