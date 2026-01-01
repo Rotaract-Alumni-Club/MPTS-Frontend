@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import '../../SCSS/AdminStyles/AdminProjectStyles/ProjectAddForm.scss'
-import Toast from '../Toast/Toast.jsx'
 
-const ProjectAddForm = ({ onCommitteeAdded }) => {
+const ProjectAddForm = ({ onProjectAdded }) => {
   const [formData, setFormData] = useState({
     projectName: '',
     description: '',
     startDate: '',
     endDate: '',
+    department: 'General',
+    chairPerson: ''
   })
-  const [showToast, setShowToast] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -21,24 +21,25 @@ const ProjectAddForm = ({ onCommitteeAdded }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
     
-    // Show toast notification
-    setShowToast(true)
+    if (!formData.projectName || !formData.description || !formData.startDate || !formData.endDate) {
+      alert('Please fill in all required fields')
+      return
+    }
     
-    // After 2 seconds, switch to view and call the callback
-    setTimeout(() => {
-      if (onCommitteeAdded) {
-        onCommitteeAdded(formData)
-      }
-      // Reset form
-      setFormData({
-        projectName: '',
-        description: '',
-        startDate: '',
-        endDate: '',
-      })
-    }, 2000)
+    if (onProjectAdded) {
+      onProjectAdded(formData)
+    }
+    
+    // Reset form
+    setFormData({
+      projectName: '',
+      description: '',
+      startDate: '',
+      endDate: '',
+      department: 'General',
+      chairPerson: ''
+    })
   }
 
   return (
@@ -118,9 +119,44 @@ const ProjectAddForm = ({ onCommitteeAdded }) => {
             </div>
           </div>
 
+          <div className='form-row'>
+            <div className='form-group'>
+              <label htmlFor="department" className='form-label'>
+                Department
+              </label>
+              <select 
+                id="department" 
+                name="department" 
+                className='form-input'
+                value={formData.department}
+                onChange={handleChange}
+              >
+                <option value="General">General</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Science">Science</option>
+                <option value="Arts">Arts</option>
+              </select>
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor="chairPerson" className='form-label'>
+                Chair Person
+              </label>
+              <input 
+                type="text" 
+                id="chairPerson" 
+                name="chairPerson" 
+                className='form-input'
+                placeholder='Chair person name'
+                value={formData.chairPerson}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
           <div className='form-actions'>
             <button type='submit' className='btn-primary'>
-              Add Project
+              Create Project
             </button>
             <button type='reset' className='btn-secondary'>
               Clear
@@ -128,7 +164,6 @@ const ProjectAddForm = ({ onCommitteeAdded }) => {
           </div>
         </form>
       </div>
-      <Toast message="Project added successfully!" isVisible={showToast} duration={2000} />
     </div>
   )
 }
