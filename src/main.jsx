@@ -18,7 +18,7 @@ import MemberDashboard from './Pages/Member/MemberDashboard.jsx';
 import MyProject from './Pages/Chair/MyProject.jsx';
 import Settings from './Pages/Settings.jsx';
 import Reports from './Pages/Reports.jsx';
-
+import SetPassword from "./Pages/Auth/SetPassword";
 
 
 
@@ -28,7 +28,11 @@ const router = createBrowserRouter([
     element: <LoginPage />,
     errorElement: <div>Page Not Found</div>
   },
-
+  {
+    path:"/set-password",
+    element:<SetPassword/>,
+    errorElement:<div>Page Not Found</div>
+  },
   {
     path: "/ChairDashboard",
     element: <ChairDashboard />,
@@ -87,7 +91,7 @@ const router = createBrowserRouter([
     element: <MemberDashboard />,
     errorElement: <div>Page Not Found</div>
   }
-  ,{
+  , {
     path: "/Settings",
     element: <Settings />,
     errorElement: <div>Page Not Found</div>

@@ -34,7 +34,7 @@ const MemberViewAccountComponent = ({ members = [], onMemberDeleted, onMemberUpd
 
   const handleConfirmDelete = () => {
     if (memberToDelete && onMemberDeleted) {
-      onMemberDeleted(memberToDelete.id);
+      onMemberDeleted(memberToDelete._id || memberToDelete.id);
     }
     setShowConfirmDelete(false);
     setMemberToDelete(null);

@@ -142,3 +142,47 @@
     }
   }
 }
+
+.member-add-form form {
+  display: grid;
+  grid-template-columns: 220px 1fr;  // label | field
+  gap: 18px 28px;                    // row gap | col gap
+  align-items: center;
+}
+
+/* Headings should span both columns */
+.member-add-form h2 {
+  grid-column: 1 / -1;
+  margin: 18px 0 6px;
+}
+
+/* Make sure inputs/selects fill the field column */
+.member-add-form input,
+.member-add-form select {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Remove extra line breaks spacing if any styles exist */
+.member-add-form label {
+  margin: 0;
+}
+
+/* Button align nicely */
+.member-add-form button[type="submit"] {
+  grid-column: 1 / -1;
+  justify-self: end;
+  width: 260px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .member-add-form form {
+    grid-template-columns: 1fr;
+  }
+
+  .member-add-form button[type="submit"] {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
