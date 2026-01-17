@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../../SCSS/componentStyle/AdminMemberForm.scss";
 import "../../SCSS/AdminStyles/AdminViewAccount/AdminViewAccount.scss";
 
+const baseURL = import.meta.env.VITE_API_URL; // ex: http://localhost:5000/api
+
 const FACULTIES = [
   "Faculty of Engineering",
   "Faculty of Medicine",
@@ -11,6 +13,8 @@ const FACULTIES = [
 ];
 
 const BATCHES = ["21", "22", "23", "24", "25"];
+
+const ROLES = ["ADMIN", "MEMBER"];
 
 const MemberAddFormComponent = ({ onMemberAdded }) => {
   const [formData, setFormData] = useState({
@@ -22,6 +26,7 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
     dob: "",
     faculty: "",
     batch: "",
+    userRole: "MEMBER", // ✅ default
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,7 +45,16 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
     e.preventDefault();
 
     // ✅ basic validation
-    const required = ["indexNo", "name", "email", "contactNO", "dob", "faculty", "batch"];
+    const required = [
+      "indexNo",
+      "name",
+      "email",
+      "contactNO",
+      "dob",
+      "faculty",
+      "batch",
+      "userRole",
+    ];
     for (const key of required) {
       if (!String(formData[key] || "").trim()) {
         setError("Please fill in all required fields.");
@@ -54,43 +68,48 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
 
       const token = localStorage.getItem("token");
 
-      // ✅ Send to backend (Admin creates user + email set-password link)
-      const res = await fetch("http://localhost:5000/api/admin/users/create", {
+      // ✅ Admin creates user + email set-password link
+      const res = await fetch(`${baseURL}/admin/users/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          Authorization: `Bearer ${token}`, // should exist because admin is logged in
         },
         body: JSON.stringify({
-          indexNo: formData.indexNo,
-          email: formData.email,      // Email = username
-          name: formData.name,
-          faculy: formData.faculty,   // IMPORTANT: your schema field is "faculy"
+          indexNo: formData.indexNo.trim(),
+          email: formData.email.trim(), // Email = username
+          name: formData.name.trim(),
+          faculy: formData.faculty, // IMPORTANT: schema field is "faculy"
           batch: formData.batch,
-          contactNO: formData.contactNO,
-          experience: "",             // optional
-          userRole: "Member",         // or "MEMBER" (keep consistent with your system)
-          gender: formData.gender,    // not in schema (only send if schema has it)
-          dob: formData.dob,          // not in schema (only send if schema has it)
+          contactNO: formData.contactNO.trim(),
+          experience: "",
+          userRole: formData.userRole, // ✅ ADMIN or MEMBER only
+          // NOTE: gender & dob are not in your BaseUser schema currently.
+          // Only send these if you add them to schema.
+          // gender: formData.gender,
+          // dob: formData.dob,
         }),
       });
 
-      const data = await res.json().catch(() => null);
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : null;
 
       if (!res.ok) {
         setError(data?.message || "Failed to create account.");
         return;
       }
 
-      // ✅ Update local UI list (your parent page uses this)
+      // ✅ Notify parent to refresh + show toast
       if (onMemberAdded) {
         onMemberAdded({
+          indexNo: formData.indexNo,
           name: formData.name,
           email: formData.email,
-          contactNumber: formData.contactNO, // keep your UI naming
+          contactNO: formData.contactNO,
+          userRole: formData.userRole,
           gender: formData.gender,
           dob: formData.dob,
-          department: formData.faculty,      // your UI uses department
+          faculy: formData.faculty,
           batch: formData.batch,
         });
       }
@@ -105,6 +124,7 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
         dob: "",
         faculty: "",
         batch: "",
+        userRole: "MEMBER",
       });
     } catch (err) {
       setError("Server error. Please try again.");
@@ -117,7 +137,6 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
     <div className="member-add-form">
       <h2>Basic Information</h2>
 
-      {/* ✅ ONE form only */}
       <form onSubmit={handleSubmit}>
         <label htmlFor="indexNo">Index Number:</label>
         <input
@@ -163,6 +182,22 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
           required
         />
 
+        {/* ✅ Role dropdown (ADMIN / MEMBER only) */}
+        <label htmlFor="userRole">Role:</label>
+        <select
+          id="userRole"
+          name="userRole"
+          value={formData.userRole}
+          onChange={handleInputChange}
+          required
+        >
+          {ROLES.map((r) => (
+            <option key={r} value={r}>
+              {r}
+            </option>
+          ))}
+        </select>
+
         <h2>Personal Details</h2>
 
         <label htmlFor="gender">Gender:</label>
@@ -188,7 +223,6 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
           required
         />
 
-        {/* ✅ Faculty dropdown */}
         <label htmlFor="faculty">Faculty:</label>
         <select
           id="faculty"
@@ -205,7 +239,6 @@ const MemberAddFormComponent = ({ onMemberAdded }) => {
           ))}
         </select>
 
-        {/* ✅ Batch dropdown */}
         <label htmlFor="batch">Batch:</label>
         <select
           id="batch"
